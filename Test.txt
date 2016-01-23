@@ -1,6 +1,0 @@
-<<<<<<< ad66c17e825f3f9b2c6a12b01f4156c4c8eedfa8
-Test!
-Test1!
-=======
-Test! 
->>>>>>> 538fe164e9de34c42f2e6d051f76d8d4a6a3f5e0
