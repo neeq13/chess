@@ -6,6 +6,7 @@ package com.mygdx.game;
 public class Figure {
     private int x;
     private int y;
+    protected String name;
 
     public int getY() {
         return y;
