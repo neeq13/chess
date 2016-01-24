@@ -3,9 +3,15 @@ package com.mygdx.game;
 /**
  * Created by Белл on 21.01.2016.
  */
-public class Figure {
-    private int x;
-    private int y;
+public abstract class Figure {
+    protected int x;
+    protected int y;
+
+    public Figure(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    public abstract void setCores(int x, int y);
 
     public int getY() {
         return y;
@@ -23,10 +29,5 @@ public class Figure {
         this.x = x;
     }
 
-    public void corse(int x, int y)
-    {
-        this.x = x * 60;
-        this.y = y * 60;
-    }
 
 }
