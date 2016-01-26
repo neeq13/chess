@@ -12,7 +12,7 @@ public class Rook extends Figure {
 
     @Override
     public void setCores(int x, int y) {
-        if (y - this.y == x - this.x || -(y - this.y) == (x - this.x)) {
+        if (Math.abs(y - this.y) == Math.abs(x - this.x)) {
             this.y = y;
             this.x = x;
         }
