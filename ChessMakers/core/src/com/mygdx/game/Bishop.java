@@ -3,9 +3,9 @@ package com.mygdx.game;
 /**
  * Created by Белл on 23.01.2016.
  */
-public class Rook extends Figure {
+public class Bishop extends Figure {
 
-    public Rook(int x, int y) {
+    public Bishop(int x, int y) {
         super(x, y);
 
     }

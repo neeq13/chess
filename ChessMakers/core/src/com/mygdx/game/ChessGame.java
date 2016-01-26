@@ -30,8 +30,8 @@ public class ChessGame extends ApplicationAdapter {
         texSize = new Texture("size.png");
         texSpawn = new Texture("spawn.png");
         texAllocation = new Texture("allocation.png");
-        fg1 = new Rook(1, 2);
-        fg2 = new Rook(3, 2);
+        fg1 = new Bishop(1, 2);
+        fg2 = new Bishop(3, 2);
     }
 
     @Override
