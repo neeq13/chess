@@ -1,6 +1,6 @@
 package com.mygdx.game.Figurs;
 
-//import com.mygdx.game.Koordinati;
+import com.mygdx.game.Koordinati;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public abstract class Figure {
     protected int x;
     protected int y;
-//    Koordinati kr = new Koordinati();
+    Koordinati kr = new Koordinati();
 
 
     protected ArrayList<Integer> keyX = new ArrayList<Integer>();
@@ -53,11 +53,11 @@ public abstract class Figure {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (proverka(i, j)) {
-//                    if (kr.proverka(i,j))continue;
+                   if (kr.proverka(i,j))continue;
                     keyX.add(i);
                     keyY.add(j);
                 }
-  //              kr.zapisKoordinat();
+            kr.zapisKoordinat();
             }
         }
     }
