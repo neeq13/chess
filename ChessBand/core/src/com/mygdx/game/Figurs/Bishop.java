@@ -11,15 +11,21 @@ public class Bishop extends Figure {
     }
 
 
-    @Override
 
-    public boolean setPosition(int x, int y) {
-        if (y - this.y == x - this.x || -(y - this.y) == (x - this.x)) {
-            this.y = y;
-            this.x = x;
+    @Override
+    public boolean proverka(int x, int y) {
+        if (y - this.y == x - this.x || -(y - this.y) == (x - this.x)){
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void setPosition(int x, int y) {
+        if (y - this.y == x - this.x || -(y - this.y) == (x - this.x)) {
+            this.y = y;
+            this.x = x;
+        }
     }
 
 

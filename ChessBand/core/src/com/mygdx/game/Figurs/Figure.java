@@ -1,5 +1,7 @@
 package com.mygdx.game.Figurs;
 
+//import com.mygdx.game.Koordinati;
+
 import java.util.ArrayList;
 
 /**
@@ -8,7 +10,11 @@ import java.util.ArrayList;
 public abstract class Figure {
     protected int x;
     protected int y;
+//    Koordinati kr = new Koordinati();
 
+
+    protected ArrayList<Integer> keyX = new ArrayList<Integer>();
+    protected ArrayList<Integer> keyY = new ArrayList<Integer>();
 
     public Figure() {
     }
@@ -16,6 +22,14 @@ public abstract class Figure {
     public Figure(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public ArrayList<Integer> getKeyX() {
+        return keyX;
+    }
+
+    public ArrayList<Integer> getKeyY() {
+        return keyY;
     }
 
 
@@ -35,15 +49,27 @@ public abstract class Figure {
         this.y = y;
     }
 
-//    public void setPosition(int x, int y) {
-//        if (y - this.y == 1 && x-this.x == 1) {
-//            this.y = y++;
-//            this.x = x++;
-//        }
-//    }
-//
+    public void light() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (proverka(i, j)) {
+//                    if (kr.proverka(i,j))continue;
+                    keyX.add(i);
+                    keyY.add(j);
+                }
+  //              kr.zapisKoordinat();
+            }
+        }
+    }
 
 
-    public abstract boolean setPosition(int x, int y);
+    public void resetLight() {
+        keyX.clear();
+        keyY.clear();
+    }
+
+    public abstract void setPosition(int x, int y);
+
+    public abstract boolean proverka(int x, int y);
 
 }

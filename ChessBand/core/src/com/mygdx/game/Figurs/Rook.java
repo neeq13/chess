@@ -1,5 +1,7 @@
 package com.mygdx.game.Figurs;
 
+import java.util.ArrayList;
+
 /**
  * Created by Алексей on 23.01.2016.
  */
@@ -11,17 +13,19 @@ public class Rook extends Figure {
 
     }
 
-
     @Override
-    public boolean setPosition(int x, int y) {
+    public boolean proverka(int x, int y) {
         if (Math.abs(y-this.y) <= 8&& x - this.x == 0|| y-this.y == 0&& Math.abs(x - this.x) <=8 ){
-            this.y = y;
-            this.x = x;
             return true;
         }
         return false;
     }
 
-
-
+    @Override
+    public void setPosition(int x, int y) {
+        if (Math.abs(y-this.y) <= 8&& x - this.x == 0|| y-this.y == 0&& Math.abs(x - this.x) <=8 ){
+            this.y = y;
+            this.x = x;
+        }
+    }
 }
