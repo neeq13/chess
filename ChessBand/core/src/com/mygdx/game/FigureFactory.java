@@ -20,9 +20,9 @@ public class FigureFactory {
         GameClass.white[5] = new Knight(5, 0);
         GameClass.white[6] = new Bishop(1, 0);
         GameClass.white[7] = new Bishop(6, 0);
-//        for (int i = 0; i < 8; i++) {
-//            GameClass.white[8+i] = new Pawn(i, 1);
-//        }
+        for (int i = 0; i < 8; i++) {
+            GameClass.white[8+i] = new Pawn(i, 1);
+        }
 
         GameClass.black[0] = new King(4, 7);
         GameClass.black[1] = new Queen(3, 7);
