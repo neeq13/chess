@@ -1,8 +1,7 @@
 
 package com.mygdx.game.Figurs;
-/**
- * Created by Алексей on 23.01.2016.
- */
+
+
 public class Queen extends Figure {
 
     public Queen(int x, int y) {
