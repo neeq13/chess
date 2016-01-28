@@ -19,7 +19,7 @@ public class GameClass extends ApplicationAdapter {
 
     public static Figure[] white = new Figure[6];
 
-
+      int pro;
     int mouseX;
     int mouseY;
     int mouseCellX;

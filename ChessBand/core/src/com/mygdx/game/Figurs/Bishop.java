@@ -22,7 +22,7 @@ public class Bishop extends Figure {
 
     @Override
     public void setPosition(int x, int y) {
-        if (y - this.y == x - this.x || -(y - this.y) == (x - this.x)) {
+        if (proverka(x,y)) {
             this.y = y;
             this.x = x;
         }

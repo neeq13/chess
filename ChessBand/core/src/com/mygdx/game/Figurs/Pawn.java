@@ -20,7 +20,7 @@ public class Pawn extends Figure {
 
     @Override
     public void setPosition(int x, int y) {
-        if (y - this.y == 1 && x - this.x == 0 || y - this.y == 2 && x - this.x == 0 && this.y < 1) {
+        if (proverka(x,y)) {
 
             this.y = y;
         }
