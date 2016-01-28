@@ -1,8 +1,6 @@
 package com.mygdx.game.Figurs;
 
-/**
- * Created by Алексей on 23.01.2016.
- */
+
 public class King extends Figure {
 
 
