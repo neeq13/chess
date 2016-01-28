@@ -1,10 +1,6 @@
 package com.mygdx.game.Figurs;
 
-import java.util.ArrayList;
 
-/**
- * Created by Алексей on 23.01.2016.
- */
 public abstract class Figure {
     protected int x;
     protected int y;
