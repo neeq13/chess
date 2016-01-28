@@ -62,7 +62,7 @@ public abstract class Figure {
         }
     }
 
-    public abstract void setTex();
+//    public abstract void setTex();
 
     public void resetLight() {
         keyX.clear();
