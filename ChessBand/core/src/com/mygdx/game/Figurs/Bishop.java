@@ -1,9 +1,7 @@
 
 package com.mygdx.game.Figurs;
 
-/**
- * Created by Алексей on 23.01.2016.
- */
+
 public class Bishop extends Figure {
 
     public Bishop(int x, int y) {
