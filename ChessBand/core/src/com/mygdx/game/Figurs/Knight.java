@@ -20,5 +20,10 @@ public class Knight extends Figure {
         return false;
     }
 
+    @Override
+    public int[] availableMoves() {
+        return null;
+    }
+
 
 }

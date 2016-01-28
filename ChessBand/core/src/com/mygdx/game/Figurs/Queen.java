@@ -20,5 +20,10 @@ public class Queen extends Figure {
         return false;
     }
 
+    @Override
+    public int[] availableMoves() {
+        return null;
+    }
+
 
 }

@@ -22,6 +22,10 @@ public class King extends Figure {
         return false;
     }
 
+    @Override
+    public int[] availableMoves() {
+        return null;
+    }
 
 
 }
