@@ -11,13 +11,26 @@ import com.mygdx.game.Figurs.*;
 public class GameClass extends ApplicationAdapter {
     SpriteBatch batch;
     Texture pole;
-    Texture smile;
+    Texture pownb;
+    Texture pown;
+    Texture queenb;
+    Texture queen;
+    Texture kingb;
+    Texture king;
+    Texture rookb;
+    Texture rook;
+    Texture knightb;
+    Texture knight;
+    Texture bisopb;
+    Texture bisop;
     Texture smileEnd;
     Texture lightField;
 
+    FigureFactory ff = new FigureFactory();
 
 
-    public static Figure[] white = new Figure[6];
+    public static Figure[] white = new Figure[16];
+    public static Figure[] black = new Figure[16];
 
 
     int mouseX;
@@ -33,7 +46,18 @@ public class GameClass extends ApplicationAdapter {
     public void create() {
         batch = new SpriteBatch();
         pole = new Texture("pole.png");
-        smile = new Texture("smile.png");
+        pown = new Texture("pawnw.png");
+        queen = new Texture("queenw.png");
+        king = new Texture("kingw.png");
+        knight = new Texture("knightw.png");
+        rook = new Texture("rookw.png");
+        bisop = new Texture("bishopw.png");
+        pownb = new Texture("pawnb.png");
+        queenb = new Texture("queenb.png");
+        kingb = new Texture("kingb.png");
+        knightb = new Texture("knightb.png");
+        rookb = new Texture("rookb.png");
+        bisopb = new Texture("bishopb.png");
         smileEnd = new Texture("smileEnd.png");
         lightField = new Texture("allocation.png");
 //
@@ -41,12 +65,7 @@ public class GameClass extends ApplicationAdapter {
 //            white[i] = new Queen(i, 0);
 //        }
 
-        white[0] = new King(1,0);
-        white[1] = new Queen(2,0);
-        white[2] = new Rook(3,0);
-        white[3] = new Knight(4,0);
-        white[4] = new Bishop(5,0);
-        white[5] = new Pawn(6,0);
+        ff.initFigure();
     }
 
     @Override
@@ -64,17 +83,29 @@ public class GameClass extends ApplicationAdapter {
                 }
             }
         }
-        for (int i = 0; i < white.length; i++) {
+        for (int i = 8; i < white.length; i++) {
             if (i == selectIndex) continue;
-            batch.draw(smile, white[i].getX() * 60, white[i].getY() * 60);
+            batch.draw(pown, white[i].getX() * 60, white[i].getY() * 60);
+            batch.draw(king, white[0].getX() * 60, white[0].getY() * 60);
+            batch.draw(queen, white[1].getX() * 60, white[1].getY() * 60);
+            batch.draw(rook, white[2].getX() * 60, white[2].getY() * 60);
+            batch.draw(rook, white[3].getX() * 60, white[3].getY() * 60);
+            batch.draw(knight, white[4].getX() * 60, white[4].getY() * 60);
+            batch.draw(knight, white[5].getX() * 60, white[5].getY() * 60);
+            batch.draw(bisop, white[6].getX() * 60, white[6].getY() * 60);
+            batch.draw(bisop, white[7].getX() * 60, white[7].getY() * 60);
+        }
+        for (int i = 8; i < black.length; i++) {
+            if (i == selectIndex) continue;
+            batch.draw(pownb, black[i].getX() * 60, black[i].getY() * 60);
         }
 
         if (selectIndex > -1) {
-            for (int i = 0; i < white[selectIndex].getKeyX().size() ; i++) {
-                batch.draw(lightField, white[selectIndex].getKeyX().get(i) * 60, white[selectIndex].getKeyY().get(i)* 60);
+            for (int i = 0; i < white[selectIndex].getKeyX().size(); i++) {
+                batch.draw(lightField, white[selectIndex].getKeyX().get(i) * 60, white[selectIndex].getKeyY().get(i) * 60);
             }
             batch.draw(smileEnd, white[selectIndex].getX() * 60, white[selectIndex].getY() * 60);
-            batch.draw(smile, mouseX - 30, mouseY - 30);
+            batch.draw(pown, mouseX - 30, mouseY - 30);
         }
         batch.end();
     }
@@ -98,9 +129,11 @@ public class GameClass extends ApplicationAdapter {
         }
 
         if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1) {
-            white[selectIndex].setPosition(mouseCellX, mouseCellY);
+            if (mouseCellX >= 0 && mouseCellY >= 0 && mouseCellX < 8 && mouseCellY < 8)
+                white[selectIndex].setPosition(mouseCellX, mouseCellY);
             white[selectIndex].resetLight();
             selectIndex = -1;
+
         }
     }
 

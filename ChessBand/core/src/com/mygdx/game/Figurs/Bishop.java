@@ -20,6 +20,7 @@ public class Bishop extends Figure {
         return false;
     }
 
+
     @Override
     public void setPosition(int x, int y) {
         if (y - this.y == x - this.x || -(y - this.y) == (x - this.x)) {

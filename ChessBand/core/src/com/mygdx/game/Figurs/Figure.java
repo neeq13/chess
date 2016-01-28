@@ -53,14 +53,15 @@ public abstract class Figure {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (proverka(i, j)) {
-                   if (kr.proverka(i,j))continue;
+                    if (kr.proverka(i, j)) continue;
                     keyX.add(i);
                     keyY.add(j);
                 }
-            kr.zapisKoordinat();
+                kr.zapisKoordinat();
             }
         }
     }
+
 
 
     public void resetLight() {
@@ -71,5 +72,6 @@ public abstract class Figure {
     public abstract void setPosition(int x, int y);
 
     public abstract boolean proverka(int x, int y);
+
 
 }
