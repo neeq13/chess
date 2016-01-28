@@ -21,6 +21,10 @@ public class Rook extends Figure {
         return false;
     }
 
+    @Override
+    public void setTex() {
+
+    }
 
     @Override
     public void setPosition(int x, int y) {

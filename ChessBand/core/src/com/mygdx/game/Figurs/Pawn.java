@@ -25,6 +25,7 @@ public class Pawn extends Figure {
             this.y = y;
         }
     }
+}
 
 
 }
