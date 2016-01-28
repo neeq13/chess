@@ -6,8 +6,16 @@ public abstract class Figure {
     protected String name;
     protected char shName;
     protected char color;
-    protected int[][] directions;
-    protected int maxstep;
+
+    public boolean isHasMoved() {
+        return hasMoved;
+    }
+
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
+    }
+
+    protected boolean hasMoved = false;
 
     public char getShName() {
         return shName;
@@ -21,8 +29,7 @@ public abstract class Figure {
         return name;
     }
 
-    public Figure(String name, char color, int x, int y) {
-        this.name = name;
+    public Figure(char color, int x, int y) {
         this.color = color;
         this.x = x;
         this.y = y;

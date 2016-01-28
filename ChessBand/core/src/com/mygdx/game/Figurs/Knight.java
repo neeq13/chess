@@ -9,8 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 public class Knight extends Figure {
 
 
-    public Knight(String name, char color, int x, int y) {
-        super(name, color, x, y);
+    public Knight(char color, int x, int y) {
+        super(color, x, y);
+        this.name = "knight";
         this.shName = 'N';
     }
 

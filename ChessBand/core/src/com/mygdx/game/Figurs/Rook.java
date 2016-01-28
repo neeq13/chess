@@ -1,8 +1,9 @@
 package com.mygdx.game.Figurs;
 
 public class Rook extends Figure {
-    public Rook(String name, char color, int x, int y) {
-        super(name, color, x, y);
+    public Rook(char color, int x, int y) {
+        super(color, x, y);
+        this.name = "rook";
         this.shName = 'R';
     }
 

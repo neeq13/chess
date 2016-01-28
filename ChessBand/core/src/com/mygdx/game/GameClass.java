@@ -15,7 +15,6 @@ public class GameClass extends ApplicationAdapter {
     Texture pole;
     Texture lightField;
 
-    public static Figure[] white = new Figure[32];
     ArrayList<Figure> figures = new ArrayList();
     Field field = new Field();
 
@@ -23,11 +22,10 @@ public class GameClass extends ApplicationAdapter {
     int mouseY;
     int mouseCellX;
     int mouseCellY;
+    int vx;
+    int vy;
+    int length = 0;
     int pawns = 8;
-    int rooks = 2;
-    int bishops = 2;
-    int knights = 2;
-
     int selectIndex = -1;
 
 
@@ -42,39 +40,29 @@ public class GameClass extends ApplicationAdapter {
         lightField = new Texture("allocation.png");
 
         for (int i = 0; i < pawns; i++) {
-            figures.add(new Pawn("pawn", 'w', i, Field.getFieldSize() - 7));
-            figures.add(new Pawn("pawn", 'b', i, Field.getFieldSize() - 2));
+            figures.add(new Pawn('w', i, Field.getFieldSize() - 7));
+            figures.add(new Pawn('b', i, Field.getFieldSize() - 2));
         }
         for (int i = 0; i < 1; i++) {
-            figures.add(new Rook("rook", 'w', 0, 0));
-            figures.add(new Rook("rook", 'b', 0, 7));
-        }
+            figures.add(new Rook('w', 0, 0));
+            figures.add(new Rook('b', 0, 7));
+            figures.add(new Rook('w', 7, 0));
+            figures.add(new Rook('b', 7, 7));
+            figures.add(new Knight('w', 1, 0));
+            figures.add(new Knight('b', 1, 7));
+            figures.add(new Knight('w', 6, 0));
+            figures.add(new Knight('b', 6, 7));
+            figures.add(new Bishop('w', 2, 0));
+            figures.add(new Bishop('b', 2, 7));
+            figures.add(new Bishop('w', 5, 0));
+            figures.add(new Bishop('b', 5, 7));
+            figures.add(new King('w', 4, 0));
+            figures.add(new Queen('w', 3, 0));
+            figures.add(new King('b', 4, 7));
+            figures.add(new Queen('b', 3, 7));
 
-        /*
-        white[16] = new Rook("rook", 'w', 0, 0);
-        white[17] = new Rook("rook", 'w', 7, 0);
-        white[18] = new Rook("rook", 'b', 0, 7);
-        white[19] = new Rook("rook", 'b', 7, 7);
-
-        white[20] = new Knight("knight", 'w', 1, 0);
-        white[21] = new Knight("knight", 'w', 6, 0);
-        white[22] = new Knight("knight", 'b', 1, 7);
-        white[23] = new Knight("knight", 'b', 6, 7);
-        white[24] = new Bishop("bishop", 'w', 2, 0);
-        white[25] = new Bishop("bishop", 'w', 5, 0);
-        white[26] = new Bishop("bishop", 'b', 2, 7);
-        white[27] = new Bishop("bishop", 'b', 5, 7);
-        white[28] = new Queen("queen", 'w', 3, 0);
-        white[29] = new Queen("queen", 'b', 3, 7);
-        white[30] = new King("king", 'w', 4, 0);
-        white[31] = new King("king", 'b', 4, 7);
-
-
-        for (int i = 0; i < white.length; i++) {
-            figures.add(white[i]);
 
         }
-*/
     }
 
     @Override
@@ -94,12 +82,11 @@ public class GameClass extends ApplicationAdapter {
         }
 
         for (Figure figure:figures) {
-            //if (iguri == selectIndex) continue;
             Texture texture = new Texture(figure.getName() + figure.getColor() + ".png");
             batch.draw(texture, figure.getX() * 60, figure.getY() * 60);
             field.setXO(figure.getY(), figure.getX(), figure.getShName());
         }
-        field.printField();
+        //field.printField();
 
         if (selectIndex > -1) {
             Texture texture = new Texture(figures.get(selectIndex).getName() + figures.get(selectIndex).getColor() + ".png");
@@ -119,16 +106,50 @@ public class GameClass extends ApplicationAdapter {
             for (Figure figure : figures) {
                 if (figure.getX() == mouseCellX && figure.getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                     selectIndex = figures.indexOf(figure);
-                    break;
                 }
             }
         }
 
         if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1) {
+            int lengthY = Math.abs(mouseCellY - figures.get(selectIndex).getY());
+            int lengthX = Math.abs(mouseCellX - figures.get(selectIndex).getX());
+            length = (lengthY > lengthX)? lengthY : lengthX;
+
+            if (mouseCellX - figures.get(selectIndex).getX() > 0) {
+                vx = 1;
+            } else if (mouseCellX - figures.get(selectIndex).getX() < 0) {
+                vx = -1;
+            } else {
+                vx = 0;
+            }
+            if (mouseCellY - figures.get(selectIndex).getY() > 0) {
+                vy = 1;
+            } else if (mouseCellY - figures.get(selectIndex).getY() < 0) {
+                vy = -1;
+            } else {
+                vy = 0;
+            }
+
             if(figures.get(selectIndex).isChangePosition(mouseCellX, mouseCellY)&& field.isCellEmpty(mouseCellY, mouseCellX)) {
                 field.setXO(figures.get(selectIndex).getY(), figures.get(selectIndex).getX(), '*');
-                figures.get(selectIndex).setPosition(mouseCellX, mouseCellY);
-                field.setXO(mouseCellY, mouseCellX, figures.get(selectIndex).getShName());
+                if((field.checkLine(figures.get(selectIndex).getY(), figures.get(selectIndex).getX(), vx, vy, length))||
+                        (figures.get(selectIndex).getShName() == 'N')) {
+                    /*
+                    ** заготовка для рокировки
+                    ** TODO: проверить что линия свободна (в ту сторону, куда пошла мышь)
+                    * найти на последней клетке ладью
+                    * проверить, чтобы ладья не ходила
+                    * проверить, чтобы не было шаха
+                    * проверить, чтобы поле не было под ударом
+                    * переместить короля и ладью
+                     */
+                    if ((figures.get(selectIndex).getShName() == 'K') && (!figures.get(selectIndex).isHasMoved())) {
+                        System.out.println("Можно делать рокировку ");
+                    }
+                    figures.get(selectIndex).setPosition(mouseCellX, mouseCellY);
+                    figures.get(selectIndex).setHasMoved(true);
+                    field.setXO(mouseCellY, mouseCellX, figures.get(selectIndex).getShName());
+                }
             }
             selectIndex = -1;
         }

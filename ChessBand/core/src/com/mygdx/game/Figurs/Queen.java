@@ -6,8 +6,9 @@ package com.mygdx.game.Figurs;
  */
 public class Queen extends Figure {
 
-    public Queen(String name, char color, int x, int y) {
-        super(name, color, x, y);
+    public Queen(char color, int x, int y) {
+        super(color, x, y);
+        this.name = "queen";
         this.shName = 'Q';
     }
 

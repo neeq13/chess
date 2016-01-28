@@ -6,8 +6,9 @@ package com.mygdx.game.Figurs;
  */
 public class Bishop extends Figure {
 
-    public Bishop(String name, char color, int x, int y) {
-        super(name, color, x, y);
+    public Bishop(char color, int x, int y) {
+        super(color, x, y);
+        this.name = "bishop";
         this.shName = 'B';
     }
 

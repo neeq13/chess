@@ -51,16 +51,13 @@ public class Field {
         }
         return false;
     }
-    public static boolean isFreeLine(int _y, int _x, int _vx, int _vy, int _l)
-    {
 
-        if(_x + _vx * _l > FIELD_SIZE || (FIELD_SIZE - 1 - _y) + _vy * _l > FIELD_SIZE || (FIELD_SIZE - 1 - _y) + _vy * _l < -1 || _x * _vx * _l < -1) return false;
-        for(int i=0;i<_l;i++) {
-            System.out.println(_x + ":" + _y + ":" + _vx + ":" + _vy + ":" + i );
-            if (isCellEmpty((FIELD_SIZE - 1 - _y) + i * _vy, _x + i * _vx))
-            {return true;}
+    public static boolean checkLine(int _y, int _x, int _vx, int _vy, int _l)
+    {
+        for(int i=0; i<_l; i++) {
+            if(!isCellEmpty(_y + i * _vy, _x + i * _vx)) return false;
         }
-        return false;
+        return true;
     }
 
 
