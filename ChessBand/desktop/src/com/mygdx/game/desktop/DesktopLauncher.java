@@ -7,9 +7,7 @@ import com.mygdx.game.GameClass;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 480;
-		config.height = 480;
-
+		System.setProperty("user.name", "EnglishWords");
 		new LwjglApplication(new GameClass(), config);
 	}
 }

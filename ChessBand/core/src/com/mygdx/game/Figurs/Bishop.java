@@ -20,6 +20,7 @@ public class Bishop extends Figure {
         return false;
     }
 
+
     @Override
     public void setPosition(int x, int y) {
         if (proverka(x,y)) {
