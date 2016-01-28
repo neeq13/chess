@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public abstract class Figure {
     protected int x;
     protected int y;
-
+    protected boolean isWasTurn;
 
     public Figure() {
     }
@@ -16,6 +16,7 @@ public abstract class Figure {
     public Figure(int x, int y) {
         this.x = x;
         this.y = y;
+        isWasTurn = false;
     }
 
 
@@ -46,4 +47,6 @@ public abstract class Figure {
 
     public abstract boolean setPosition(int x, int y);
 
+    //Все возможные ходы
+    public abstract int[] availableMoves();
 }
