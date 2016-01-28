@@ -127,7 +127,7 @@ public class GameClass extends ApplicationAdapter {
         }
 
         if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1) {
-            if (mouseCellX >= 0 && mouseCellY >= 0 && mouseCellX < 8 && mouseCellY < 8)
+            if (mouseCellX >= 0 && mouseCellY >= 0 && mouseCellX < 8 && mouseCellY < 8)//Условие запрета выхода за границу поля
                 white[selectIndex].setPosition(mouseCellX, mouseCellY);
             white[selectIndex].resetLight();
             selectIndex = -1;
