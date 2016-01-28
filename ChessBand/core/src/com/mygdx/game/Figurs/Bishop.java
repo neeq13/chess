@@ -6,21 +6,16 @@ package com.mygdx.game.Figurs;
  */
 public class Bishop extends Figure {
 
-    public Bishop(int x, int y) {
-        super(x, y);
+    public Bishop(String name, char color, int x, int y) {
+        super(name, color, x, y);
+        this.shName = 'B';
     }
 
-
     @Override
-
-    public boolean setPosition(int x, int y) {
+    public void setPosition(int x, int y) {
         if (y - this.y == x - this.x || -(y - this.y) == (x - this.x)) {
             this.y = y;
             this.x = x;
-            return true;
         }
-        return false;
     }
-
-
 }
