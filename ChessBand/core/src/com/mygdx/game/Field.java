@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.mygdx.game.Figurs.Figure;
+
 public class Field {
     private static final int FIELD_SIZE = 8;
     private int x;
@@ -60,5 +62,8 @@ public class Field {
         return true;
     }
 
-
+    public static char getFigure(int _y, int _x, int _vx, int _vy, int _l)
+    {
+        return field[_y + _l * _vy][_x + _l * _vx];
+    }
 }

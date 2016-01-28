@@ -49,17 +49,17 @@ public class GameClass extends ApplicationAdapter {
             figures.add(new Rook('w', 7, 0));
             figures.add(new Rook('b', 7, 7));
             figures.add(new Knight('w', 1, 0));
-            figures.add(new Knight('b', 1, 7));
+            /*figures.add(new Knight('b', 1, 7));
             figures.add(new Knight('w', 6, 0));
             figures.add(new Knight('b', 6, 7));
             figures.add(new Bishop('w', 2, 0));
             figures.add(new Bishop('b', 2, 7));
             figures.add(new Bishop('w', 5, 0));
-            figures.add(new Bishop('b', 5, 7));
+            figures.add(new Bishop('b', 5, 7));*/
             figures.add(new King('w', 4, 0));
-            figures.add(new Queen('w', 3, 0));
+            //figures.add(new Queen('w', 3, 0));
             figures.add(new King('b', 4, 7));
-            figures.add(new Queen('b', 3, 7));
+            //figures.add(new Queen('b', 3, 7));
 
 
         }
@@ -114,9 +114,12 @@ public class GameClass extends ApplicationAdapter {
             int lengthY = Math.abs(mouseCellY - figures.get(selectIndex).getY());
             int lengthX = Math.abs(mouseCellX - figures.get(selectIndex).getX());
             length = (lengthY > lengthX)? lengthY : lengthX;
+            int rokirovkaLength = field.getFieldSize() - 4;
 
             if (mouseCellX - figures.get(selectIndex).getX() > 0) {
                 vx = 1;
+                --rokirovkaLength;
+                //char rookFind = field[field.getFieldSize()]
             } else if (mouseCellX - figures.get(selectIndex).getX() < 0) {
                 vx = -1;
             } else {
@@ -136,15 +139,26 @@ public class GameClass extends ApplicationAdapter {
                         (figures.get(selectIndex).getShName() == 'N')) {
                     /*
                     ** заготовка для рокировки
-                    ** TODO: проверить что линия свободна (в ту сторону, куда пошла мышь)
-                    * найти на последней клетке ладью
-                    * проверить, чтобы ладья не ходила
+                    ** TODO: проверить что линия свободна (в ту сторону, куда пошла мышь)+
+                    * найти на последней клетке ладью+
+                    * проверить, чтобы ладья не ходила+
                     * проверить, чтобы не было шаха
                     * проверить, чтобы поле не было под ударом
                     * переместить короля и ладью
                      */
-                    if ((figures.get(selectIndex).getShName() == 'K') && (!figures.get(selectIndex).isHasMoved())) {
+                    if ((figures.get(selectIndex).getShName() == 'K') &&
+                            (!figures.get(selectIndex).isHasMoved())&&
+                            (field.checkLine(figures.get(selectIndex).getY(), figures.get(selectIndex).getX(), vx, 0, rokirovkaLength ))) {
+                        for (Figure rook : figures) { //не нравится, надо сделать поле, которое в клетку помещает объект, чтобы можно было извлечь легко
+                            int newX = figures.get(selectIndex).getX() + rokirovkaLength * vx;
+                            int newY = figures.get(selectIndex).getY();
+                            if(rook.getX() == newX && rook.getY() == newY && rook.getName() == "rook" &&
+                                    rook.getColor() == figures.get(selectIndex).getColor() && !rook.isHasMoved()) {
+                                System.out.println("Это ладья");
+                            }
+                        }
                         System.out.println("Можно делать рокировку ");
+
                     }
                     figures.get(selectIndex).setPosition(mouseCellX, mouseCellY);
                     figures.get(selectIndex).setHasMoved(true);
