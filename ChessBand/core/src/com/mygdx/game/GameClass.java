@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Figurs.Figure;
+import com.mygdx.game.Figurs.Pawn;
 import com.mygdx.game.Figurs.Rook;
 
 public class GameClass extends ApplicationAdapter {
@@ -14,7 +15,8 @@ public class GameClass extends ApplicationAdapter {
     Texture pole;
     Texture smile;
     Texture smileEnd;
-
+    Texture pawn;
+    Texture allocation;
 
 
     Figure[] white = new Figure[8];
@@ -25,7 +27,6 @@ public class GameClass extends ApplicationAdapter {
     int mouseCellX;
     int mouseCellY;
 
-
     int selectIndex = -1;
 
 
@@ -35,9 +36,11 @@ public class GameClass extends ApplicationAdapter {
         pole = new Texture("pole.png");
         smile = new Texture("smile.png");
         smileEnd = new Texture("smileEnd.png");
+        pawn = new Texture("pawnw.png");
+        allocation = new Texture("allocation.png");
 
         for (int i = 0; i < 8; i++) {
-            white[i] = new Rook(i, 0);
+            white[i] = new Pawn(i, 1);
         }
     }
 
@@ -58,12 +61,13 @@ public class GameClass extends ApplicationAdapter {
         }
         for (int i = 0; i < 8; i++) {
             if (i == selectIndex) continue;
-            batch.draw(smile, white[i].getX() * 60, white[i].getY() * 60);
+            batch.draw(pawn, white[i].getX() * 60, white[i].getY() * 60);
         }
 
         if (selectIndex > -1) {
             //batch.draw(smileEnd, white[selectIndex].getX() * 60, white[selectIndex].getY() * 60);
-            batch.draw(smile, mouseX - 30, mouseY - 30);
+            paintAllocation(white[selectIndex].availableMoves());
+
         }
         batch.end();
     }
@@ -88,7 +92,16 @@ public class GameClass extends ApplicationAdapter {
 
         if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1) {
             white[selectIndex].setPosition(mouseCellX, mouseCellY);
+
             selectIndex = -1;
+        }
+    }
+
+    private void paintAllocation(int[] stroke) {
+        for (int i = 0; i < stroke.length; i++) {
+            if (stroke[i] != 0) {
+                batch.draw(allocation, white[selectIndex].getX() * 60, stroke[i] * 60);
+            }
         }
     }
 
