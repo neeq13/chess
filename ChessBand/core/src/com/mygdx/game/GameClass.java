@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Figurs.*;
 
+
 public class GameClass extends ApplicationAdapter {
     SpriteBatch batch;
     Texture pole;
@@ -26,13 +27,11 @@ public class GameClass extends ApplicationAdapter {
     Texture smileEnd;
     Texture lightField;
 
-    FigureFactory ff = new FigureFactory();
-
 
     public static Figure[] white = new Figure[16];
     public static Figure[] black = new Figure[16];
 
-      int pro;
+
     int mouseX;
     int mouseY;
     int mouseCellX;
@@ -65,7 +64,7 @@ public class GameClass extends ApplicationAdapter {
 //            white[i] = new Queen(i, 0);
 //        }
 
-        ff.initFigure();
+
     }
 
     @Override
