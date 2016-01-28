@@ -46,7 +46,7 @@ public class GameClass extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        pole = new Texture("pole.png");
+        pole = new Texture("size.png");
         pown = new Texture("pawnw.png");
         queen = new Texture("queenw.png");
         king = new Texture("kingw.png");
@@ -82,7 +82,7 @@ public class GameClass extends ApplicationAdapter {
         }
         for (int i = 8; i < white.length; i++) {
             if (i == selectIndex) continue;
-            /*batch.draw(pown, white[i].getX() * 60, white[i].getY() * 60);
+            batch.draw(pown, white[i].getX() * 60, white[i].getY() * 60);
             batch.draw(king, white[0].getX() * 60, white[0].getY() * 60);
             batch.draw(queen, white[1].getX() * 60, white[1].getY() * 60);
             batch.draw(rook, white[2].getX() * 60, white[2].getY() * 60);
@@ -90,8 +90,8 @@ public class GameClass extends ApplicationAdapter {
             batch.draw(knight, white[4].getX() * 60, white[4].getY() * 60);
             batch.draw(knight, white[5].getX() * 60, white[5].getY() * 60);
             batch.draw(bisop, white[6].getX() * 60, white[6].getY() * 60);
-            batch.draw(bisop, white[7].getX() * 60, white[7].getY() * 60);*/
-            white[i].setTex();
+            batch.draw(bisop, white[7].getX() * 60, white[7].getY() * 60);
+            //white[i].setTex();
         }
 //        for (int i = 8; i < black.length; i++) {
 //            if (i == selectIndex) continue;
