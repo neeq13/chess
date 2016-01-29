@@ -1,6 +1,8 @@
 package com.mygdx.game.Figurs;
 
+import com.mygdx.game.FigureFactory;
 import com.mygdx.game.Koordinati;
+import com.mygdx.game.Point;
 
 import java.util.ArrayList;
 
@@ -11,10 +13,11 @@ public abstract class Figure {
     protected int x;
     protected int y;
     Koordinati kr = new Koordinati();
+    FigureFactory ff = new FigureFactory();
 
 
-    protected ArrayList<Integer> keyX = new ArrayList<Integer>();
-    protected ArrayList<Integer> keyY = new ArrayList<Integer>();
+    protected ArrayList<Point> kletkaSFiguroy = new ArrayList();
+
 
     public Figure() {
     }
@@ -24,14 +27,13 @@ public abstract class Figure {
         this.y = y;
     }
 
-    public ArrayList<Integer> getKeyX() {
-        return keyX;
+    public ArrayList<Point> getKletkaSFiguroy() {
+        return kletkaSFiguroy;
     }
 
-    public ArrayList<Integer> getKeyY() {
-        return keyY;
+    public void setKletkaSFiguroy(ArrayList<Point> kletkaSFiguroy) {
+        this.kletkaSFiguroy = kletkaSFiguroy;
     }
-
 
     public int getX() {
         return x;
@@ -53,20 +55,18 @@ public abstract class Figure {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (proverka(i, j)) {
-                    if (kr.proverka(i, j)) continue;
-                    keyX.add(i);
-                    keyY.add(j);
+                    if (ff.proverka(i, j)) continue;
+                    kletkaSFiguroy.add(new Point(i,j));
+
                 }
-                kr.zapisKoordinat();
+                ff.zapisKoordinat();
             }
         }
     }
 
-//    public abstract void setTex();
 
     public void resetLight() {
-        keyX.clear();
-        keyY.clear();
+        kletkaSFiguroy.clear();
     }
 
     public abstract void setPosition(int x, int y);
