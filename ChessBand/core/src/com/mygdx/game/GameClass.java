@@ -81,7 +81,7 @@ public class GameClass extends ApplicationAdapter {
                 }
             }
         }
-
+//Ura)))
         for (Figure figura : ff.white) {
             batch.draw(pown, figura.getX() * 60, figura.getY() * 60);
         }
