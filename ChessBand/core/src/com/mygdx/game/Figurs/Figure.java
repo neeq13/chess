@@ -12,12 +12,17 @@ import java.util.ArrayList;
 public abstract class Figure {
     protected int x;
     protected int y;
-    Koordinati kr = new Koordinati();
     FigureFactory ff = new FigureFactory();
 
+    protected ArrayList<Point> podsvetka = new ArrayList<Point>();
 
-    protected ArrayList<Point> kletkaSFiguroy = new ArrayList();
+    public ArrayList<Point> getPodsvetka() {
+        return podsvetka;
+    }
 
+    public void setPodsvetka(ArrayList<Point> podsvetka) {
+        this.podsvetka = podsvetka;
+    }
 
     public Figure() {
     }
@@ -25,14 +30,6 @@ public abstract class Figure {
     public Figure(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    public ArrayList<Point> getKletkaSFiguroy() {
-        return kletkaSFiguroy;
-    }
-
-    public void setKletkaSFiguroy(ArrayList<Point> kletkaSFiguroy) {
-        this.kletkaSFiguroy = kletkaSFiguroy;
     }
 
     public int getX() {
@@ -55,18 +52,16 @@ public abstract class Figure {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (proverka(i, j)) {
-                    if (ff.proverka(i, j)) continue;
-                    kletkaSFiguroy.add(new Point(i,j));
-
+                    if (ff.proverka(i,j))continue;
+                        podsvetka.add(new Point(i, j));
                 }
-                ff.zapisKoordinat();
             }
         }
     }
 
 
     public void resetLight() {
-        kletkaSFiguroy.clear();
+        podsvetka.clear();
     }
 
     public abstract void setPosition(int x, int y);

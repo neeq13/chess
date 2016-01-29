@@ -12,8 +12,6 @@ public class FigureFactory {
     public static ArrayList<Figure> white = new ArrayList<Figure>();
     public static Figure[] black = new Figure[16];
 
-    private ArrayList<Point> allFigurePosition = new ArrayList<Point>();
-
     public  FigureFactory(){
     }
 
@@ -43,40 +41,13 @@ public class FigureFactory {
         }
     }
 
-    public void zapisKoordinat() {
-        ochistka();
-        for (int i = 0; i < white.size(); i++) {
-            allFigurePosition.add(new Point(white.get(i).getX(),white.get(i).getY()));
-        }
-    }
-
     public boolean proverka(int x, int y) {
-        for (int i = 0; i < allFigurePosition.size(); i++) {
-            if (allFigurePosition.get(i).getX() == x && allFigurePosition.get(i).getY() == y){
+        for (int i = 0; i < white.size(); i++) {
+            if (white.get(i).getX() == x && white.get(i).getY() == y){
                 return true;
             }
-            return false;
         }
         return false;
     }
 
-    public void ochistka(){
-        allFigurePosition.clear();
-    }
-
-    public static ArrayList<Figure> getWhite() {
-        return white;
-    }
-
-    public static void setWhite(ArrayList<Figure> white) {
-        FigureFactory.white = white;
-    }
-
-    public ArrayList<Point> getAllFigurePosition() {
-        return allFigurePosition;
-    }
-
-    public void setAllFigurePosition(ArrayList<Point> allFigurePosition) {
-        this.allFigurePosition = allFigurePosition;
-    }
 }

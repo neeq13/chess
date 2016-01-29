@@ -28,6 +28,12 @@ public class GameClass extends ApplicationAdapter {
     Texture lightField;
 
     FigureFactory ff = new FigureFactory();
+//    Pawn pawn = new Pawn(1,1);
+
+//хочу массивы с фигурами перенести в класс фигур фактори
+//    public static Figure[] white = new Figure[16];
+//    public static Figure[] black = new Figure[16];
+
 
     int mouseX;
     int mouseY;
@@ -36,7 +42,6 @@ public class GameClass extends ApplicationAdapter {
 
 
     int selectIndex = -1;
-
 
 
     @Override
@@ -82,8 +87,8 @@ public class GameClass extends ApplicationAdapter {
         }
 
         if (selectIndex > -1) {
-            for (int i = 0; i < ff.white.get(selectIndex).getKletkaSFiguroy().size(); i++) {
-                batch.draw(lightField, ff.white.get(selectIndex).getKletkaSFiguroy().get(i).getX()* 60, ff.white.get(selectIndex).getKletkaSFiguroy().get(i).getY() * 60);
+            for (int i = 0; i < ff.white.get(selectIndex).getPodsvetka().size(); i++) {
+                batch.draw(lightField, ff.white.get(selectIndex).getPodsvetka().get(i).getX()* 60, ff.white.get(selectIndex).getPodsvetka().get(i).getY() * 60);
             }
             batch.draw(smileEnd, ff.white.get(selectIndex).getX() * 60, ff.white.get(selectIndex).getY() * 60);
             batch.draw(pown, mouseX - 30, mouseY - 30);
