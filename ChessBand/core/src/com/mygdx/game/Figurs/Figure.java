@@ -1,5 +1,7 @@
 package com.mygdx.game.Figurs;
 
+import com.badlogic.gdx.graphics.Texture;
+
 import java.util.ArrayList;
 
 /**
@@ -8,16 +10,26 @@ import java.util.ArrayList;
 public abstract class Figure {
     protected int x;
     protected int y;
+
+
+
+    protected Texture texture;
     protected boolean isWasTurn;
+    protected boolean isWhite = true;
 
-    public Figure() {
-    }
+    public static int[][] field = new int[8][8];
 
-    public Figure(int x, int y) {
+    public Figure(int x, int y, Texture texture, boolean isWhite) {
         this.x = x;
         this.y = y;
+        this.texture = texture;
+        this.isWhite = isWhite;
+        if (isWhite) field[y][x] = 1;
+        else field[y][x] = 2;
         isWasTurn = false;
     }
+
+
 
 
     public int getX() {
@@ -36,6 +48,14 @@ public abstract class Figure {
         this.y = y;
     }
 
+    public Texture getTexture() {
+        return texture;
+    }
+
+    public void setTexture(Texture texture) {
+        this.texture = texture;
+    }
+
 //    public void setPosition(int x, int y) {
 //        if (y - this.y == 1 && x-this.x == 1) {
 //            this.y = y++;
@@ -48,5 +68,5 @@ public abstract class Figure {
     public abstract boolean setPosition(int x, int y);
 
     //Все возможные ходы
-    public abstract int[] availableMoves();
+    public abstract int[][] availableMoves();
 }

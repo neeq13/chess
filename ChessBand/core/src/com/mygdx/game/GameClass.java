@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Figurs.Bishop;
 import com.mygdx.game.Figurs.Figure;
 import com.mygdx.game.Figurs.Pawn;
 import com.mygdx.game.Figurs.Rook;
@@ -15,11 +16,12 @@ public class GameClass extends ApplicationAdapter {
     Texture pole;
     Texture smile;
     Texture smileEnd;
-    Texture pawn;
+    Texture pawnW;
     Texture allocation;
+    Texture bishopW;
 
 
-    Figure[] white = new Figure[8];
+    Figure[] white = new Figure[9];
 
 
     int mouseX;
@@ -36,12 +38,14 @@ public class GameClass extends ApplicationAdapter {
         pole = new Texture("pole.png");
         smile = new Texture("smile.png");
         smileEnd = new Texture("smileEnd.png");
-        pawn = new Texture("pawnw.png");
+        pawnW = new Texture("pawnw.png");
+        bishopW = new Texture("bishopw.png");
         allocation = new Texture("allocation.png");
 
         for (int i = 0; i < 8; i++) {
-            white[i] = new Pawn(i, 1);
+            white[i] = new Pawn(i, 1, pawnW, true);
         }
+        white[8] = new Bishop(3, 5, bishopW, true);
     }
 
     @Override
@@ -50,6 +54,7 @@ public class GameClass extends ApplicationAdapter {
         Gdx.gl.glClearColor(0, 0, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
+
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if ((i + j) % 2 != 0) {
@@ -59,13 +64,16 @@ public class GameClass extends ApplicationAdapter {
                 }
             }
         }
+
         for (int i = 0; i < 8; i++) {
             if (i == selectIndex) continue;
-            batch.draw(pawn, white[i].getX() * 60, white[i].getY() * 60);
+            batch.draw(white[i].getTexture(), white[i].getX() * 60, white[i].getY() * 60);
         }
 
+        batch.draw(white[8].getTexture(), white[8].getX() * 60, white[8].getY() * 60);
+
         if (selectIndex > -1) {
-            //batch.draw(smileEnd, white[selectIndex].getX() * 60, white[selectIndex].getY() * 60);
+            batch.draw(white[selectIndex].getTexture(), white[selectIndex].getX() * 60, white[selectIndex].getY() * 60);
             paintAllocation(white[selectIndex].availableMoves());
 
         }
@@ -82,7 +90,7 @@ public class GameClass extends ApplicationAdapter {
 
 
         if (selectIndex == -1) {
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < 9; i++) {
                 if (white[i].getX() == mouseCellX && white[i].getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                     selectIndex = i;
                     break;
@@ -97,10 +105,12 @@ public class GameClass extends ApplicationAdapter {
         }
     }
 
-    private void paintAllocation(int[] stroke) {
+    private void paintAllocation(int[][] stroke) {
         for (int i = 0; i < stroke.length; i++) {
-            if (stroke[i] != 0) {
-                batch.draw(allocation, white[selectIndex].getX() * 60, stroke[i] * 60);
+            for (int j = 0; j < stroke.length; j++) {
+                if (stroke[i][j] != 0) {
+                    batch.draw(allocation, j * 60, i * 60);
+                }
             }
         }
     }
