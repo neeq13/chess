@@ -11,10 +11,10 @@ public class Bishop extends Figure {
     }
 
 
-
     @Override
     public boolean proverka(int x, int y) {
-        if (y - this.y == x - this.x || -(y - this.y) == (x - this.x)){
+        if (!ff.proverka(x, y))
+        if (y - this.y == x - this.x || -(y - this.y) == (x - this.x)) {
             return true;
         }
         return false;
@@ -22,7 +22,7 @@ public class Bishop extends Figure {
 
     @Override
     public void setPosition(int x, int y) {
-        if (proverka(x,y)) {
+        if (proverka(x, y)) {
             this.y = y;
             this.x = x;
         }

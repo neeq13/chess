@@ -52,13 +52,11 @@ public abstract class Figure {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (proverka(i, j)) {
-                    if (ff.proverka(i,j))continue;
-                        podsvetka.add(new Point(i, j));
+                    podsvetka.add(new Point(i, j));
                 }
             }
         }
     }
-
 
     public void resetLight() {
         podsvetka.clear();

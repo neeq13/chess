@@ -12,6 +12,7 @@ public class Queen extends Figure {
 
     @Override
     public boolean proverka(int x, int y) {
+        if (!ff.proverka(x,y))
         if (Math.abs(y-this.y) <=8&& x - this.x == 0|| y-this.y == 0&& Math.abs(x - this.x) <=8 ||y - this.y == x - this.x || -(y - this.y) == (x - this.x)){
             return true;
         }

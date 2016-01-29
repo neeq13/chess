@@ -88,7 +88,7 @@ public class GameClass extends ApplicationAdapter {
 
         if (selectIndex > -1) {
             for (int i = 0; i < ff.white.get(selectIndex).getPodsvetka().size(); i++) {
-                batch.draw(lightField, ff.white.get(selectIndex).getPodsvetka().get(i).getX()* 60, ff.white.get(selectIndex).getPodsvetka().get(i).getY() * 60);
+                batch.draw(lightField, ff.white.get(selectIndex).getPodsvetka().get(i).getX() * 60, ff.white.get(selectIndex).getPodsvetka().get(i).getY() * 60);
             }
             batch.draw(smileEnd, ff.white.get(selectIndex).getX() * 60, ff.white.get(selectIndex).getY() * 60);
             batch.draw(pown, mouseX - 30, mouseY - 30);

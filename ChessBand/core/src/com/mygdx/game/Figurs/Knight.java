@@ -12,6 +12,7 @@ public class Knight extends Figure {
 
     @Override
     public boolean proverka(int x, int y) {
+        if (!ff.proverka(x, y))
         if (Math.abs(y-this.y) == 2&& Math.abs(x - this.x) == 1|| Math.abs(y-this.y) == 1&& Math.abs(x - this.x) == 2){
             return true;
         }
