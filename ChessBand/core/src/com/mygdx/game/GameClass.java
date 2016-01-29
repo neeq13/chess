@@ -28,6 +28,7 @@ public class GameClass extends ApplicationAdapter {
     Texture lightField;
 
     FigureFactory ff = new FigureFactory();
+    Pawn pawn = new Pawn(1,1);
 
 
     public static Figure[] white = new Figure[16];
@@ -91,7 +92,7 @@ public class GameClass extends ApplicationAdapter {
             batch.draw(knight, white[5].getX() * 60, white[5].getY() * 60);
             batch.draw(bisop, white[6].getX() * 60, white[6].getY() * 60);
             batch.draw(bisop, white[7].getX() * 60, white[7].getY() * 60);
-            //white[i].setTex();
+//            pawn.setTex();
         }
 //        for (int i = 8; i < black.length; i++) {
 //            if (i == selectIndex) continue;
