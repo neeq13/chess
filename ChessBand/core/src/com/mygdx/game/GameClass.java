@@ -28,8 +28,8 @@ public class GameClass extends ApplicationAdapter {
     Texture lightField;
 
 
-    public static Figure[] white = new Figure[16];
-    public static Figure[] black = new Figure[16];
+    public static Figure[] white = new Figure[8];
+//    public static Figure[] black = new Figure[16];
 
 
     int mouseX;
@@ -59,10 +59,10 @@ public class GameClass extends ApplicationAdapter {
         bisopb = new Texture("bishopb.png");
         smileEnd = new Texture("smileEnd.png");
         lightField = new Texture("allocation.png");
-//
-//        for (int i = 0; i < 8; i++) {
-//            white[i] = new Queen(i, 0);
-//        }
+
+        for (int i = 0; i < white.length; i++) {
+            white[i] = new Queen(i, 0);
+        }
 
 
     }
@@ -82,22 +82,22 @@ public class GameClass extends ApplicationAdapter {
                 }
             }
         }
-        for (int i = 8; i < white.length; i++) {
-            if (i == selectIndex) continue;
+        for (int i = 0; i < white.length; i++) {
+            if (selectIndex == i) continue;
             batch.draw(pown, white[i].getX() * 60, white[i].getY() * 60);
-            batch.draw(king, white[0].getX() * 60, white[0].getY() * 60);
-            batch.draw(queen, white[1].getX() * 60, white[1].getY() * 60);
-            batch.draw(rook, white[2].getX() * 60, white[2].getY() * 60);
-            batch.draw(rook, white[3].getX() * 60, white[3].getY() * 60);
-            batch.draw(knight, white[4].getX() * 60, white[4].getY() * 60);
-            batch.draw(knight, white[5].getX() * 60, white[5].getY() * 60);
-            batch.draw(bisop, white[6].getX() * 60, white[6].getY() * 60);
-            batch.draw(bisop, white[7].getX() * 60, white[7].getY() * 60);
+//            batch.draw(king, white[0].getX() * 60, white[0].getY() * 60);
+//            batch.draw(queen, white[1].getX() * 60, white[1].getY() * 60);
+//            batch.draw(rook, white[2].getX() * 60, white[2].getY() * 60);
+//            batch.draw(rook, white[3].getX() * 60, white[3].getY() * 60);
+//            batch.draw(knight, white[4].getX() * 60, white[4].getY() * 60);
+//            batch.draw(knight, white[5].getX() * 60, white[5].getY() * 60);
+//            batch.draw(bisop, white[6].getX() * 60, white[6].getY() * 60);
+//            batch.draw(bisop, white[7].getX() * 60, white[7].getY() * 60);
         }
-        for (int i = 8; i < black.length; i++) {
-            if (i == selectIndex) continue;
-            batch.draw(pownb, black[i].getX() * 60, black[i].getY() * 60);
-        }
+//        for (int i = 8; i < black.length; i++) {
+//            if (i == selectIndex) continue;
+//            batch.draw(pownb, black[i].getX() * 60, black[i].getY() * 60);
+//        }
 
         if (selectIndex > -1) {
             for (int i = 0; i < white[selectIndex].getKeyX().size(); i++) {
