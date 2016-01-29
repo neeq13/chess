@@ -28,7 +28,7 @@ public class GameClass extends ApplicationAdapter {
     Texture lightField;
 
     FigureFactory ff = new FigureFactory();
-    Pawn pawn = new Pawn(1,1);
+//    Pawn pawn = new Pawn(1,1);
 
 
     public static Figure[] white = new Figure[16];
