@@ -84,7 +84,7 @@ public class GameClass extends ApplicationAdapter {
         for (Figure figure:figures) {
             Texture texture = new Texture(figure.getName() + figure.getColor() + ".png");
             batch.draw(texture, figure.getX() * 60, figure.getY() * 60);
-            field.setXO(figure.getY(), figure.getX(), figure.getShName());
+            field.setXO(figure.getY(), figure.getX(), figure);
         }
         //field.printField();
 
@@ -131,7 +131,7 @@ public class GameClass extends ApplicationAdapter {
             }
 
             if(figures.get(selectIndex).isChangePosition(mouseCellX, mouseCellY)&& field.isCellEmpty(mouseCellY, mouseCellX)) {
-                field.setXO(figures.get(selectIndex).getY(), figures.get(selectIndex).getX(), '*');
+                field.setXO(figures.get(selectIndex).getY(), figures.get(selectIndex).getX(), null);
                 if((field.checkLine(figures.get(selectIndex).getY(), figures.get(selectIndex).getX(), vx, vy, length))||
                         (figures.get(selectIndex).getShName() == 'N')) {
                     /*
@@ -148,7 +148,7 @@ public class GameClass extends ApplicationAdapter {
                     }
                     figures.get(selectIndex).setPosition(mouseCellX, mouseCellY);
                     figures.get(selectIndex).setHasMoved(true);
-                    field.setXO(mouseCellY, mouseCellX, figures.get(selectIndex).getShName());
+                    field.setXO(mouseCellY, mouseCellX, figures.get(selectIndex));
                 }
             }
             selectIndex = -1;
