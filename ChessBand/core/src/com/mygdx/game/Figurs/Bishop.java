@@ -1,6 +1,8 @@
 
 package com.mygdx.game.Figurs;
 
+import com.mygdx.game.Field;
+
 /**
  * Created by Алексей on 23.01.2016.
  */
@@ -13,7 +15,7 @@ public class Bishop extends Figure {
     }
 
     public boolean proverka(int x, int y){
-        if (!ff.proverka(x, y)) {
+        if (Field.isCellEmpty(y, x)) {
             if (Math.abs(y - this.y) == Math.abs(x - this.x)) {
                 return true;
             }

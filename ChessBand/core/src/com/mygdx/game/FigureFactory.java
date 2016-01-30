@@ -28,7 +28,7 @@ public class FigureFactory {
     public void setColor(char color) {
         this.color = color;
     }
-    
+
 // заполняем массивы фигурами
     public void initFigure() {
         white.add(new King(4, 0));
