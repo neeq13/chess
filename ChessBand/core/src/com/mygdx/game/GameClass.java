@@ -29,7 +29,7 @@ public class GameClass extends ApplicationAdapter {
     int mouseCellY;
 
     int selectIndex = -1;
-
+::
 
 
     @Override
@@ -50,6 +50,7 @@ public class GameClass extends ApplicationAdapter {
         white[8] = new Bishop(3, 5, bishopW, true);
         white[9] = new Knight(5, 0, knightW, true);
         white[10] = new King(0, 7, kingW, true);
+        ;
 
 
     }
