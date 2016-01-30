@@ -1,7 +1,6 @@
 package com.mygdx.game.Figurs;
 
 import com.mygdx.game.FigureFactory;
-import com.mygdx.game.Koordinati;
 import com.mygdx.game.Point;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ public abstract class Figure {
     protected int x;
     protected int y;
     FigureFactory ff = new FigureFactory();
-
+//создаем массив точек с коорднатами подсветки
     protected ArrayList<Point> podsvetka = new ArrayList<Point>();
 
     public ArrayList<Point> getPodsvetka() {
@@ -24,8 +23,6 @@ public abstract class Figure {
         this.podsvetka = podsvetka;
     }
 
-    public Figure() {
-    }
 
     public Figure(int x, int y) {
         this.x = x;
@@ -47,7 +44,7 @@ public abstract class Figure {
     public void setY(int y) {
         this.y = y;
     }
-
+    // заполняем массив точек с подсветкой
     public void light() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -57,11 +54,11 @@ public abstract class Figure {
             }
         }
     }
-
+// очищаем массив от фигур
     public void resetLight() {
         podsvetka.clear();
     }
-
+// абстрактные методы, установка фигуры в новые координаты и проверка на ход фигуры
     public abstract void setPosition(int x, int y);
 
     public abstract boolean proverka(int x, int y);
