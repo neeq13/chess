@@ -57,13 +57,13 @@ public class GameClass extends ApplicationAdapter {
                 }
             }
         }
-/*
+
         for (Figure figure: figures.white) {
             Texture texture = new Texture(figure.getName() + figure.getColor() + ".png");
             batch.draw(texture, figure.getX() * 60, figure.getY() * 60);
             field.setXO(figure.getY(), figure.getX(), figure);
         }
-        */
+
         //field.printField();
 
         if (selectIndex > -1) {
