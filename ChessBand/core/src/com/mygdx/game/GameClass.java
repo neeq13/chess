@@ -77,19 +77,6 @@ public class GameClass extends ApplicationAdapter {
         mouseCellX = mouseX / 60;
         mouseCellY = mouseY / 60;
 
-//      if (selectIndex == -1)
-//          for (Figure figure : figures.white) {
-//            if (figure.getX() == mouseCellX && figure.getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-//                selectIndex = figures.white.indexOf(figure);
-//                for (int i = 0; i < figures.white.size(); i++) {
-//                    if (figures.white.get(i).getX() == mouseCellX && figures.white.get(i).getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-//                        figures.white.get(i).light();
-//                        selectIndex = i;
-//                        break;
-//                    }
-//                }
-//            }
-//        }
         if (selectIndex == -1) {
             for (int i = 0; i < figures.white.size(); i++) {
                 if (figures.white.get(i).getX() == mouseCellX && figures.white.get(i).getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {

@@ -15,6 +15,12 @@ public class FigureFactory {
     public static ArrayList<Figure> white = new ArrayList<Figure>();
 
     private char color;
+
+
+    public FigureFactory(char color) {
+        this.color = color;
+    }
+
     public char getColor() {
         return color;
     }
@@ -22,10 +28,7 @@ public class FigureFactory {
     public void setColor(char color) {
         this.color = color;
     }
-
-    public FigureFactory(char color) {
-        this.color = color;
-    }
+    
 // заполняем массивы фигурами
     public void initFigure() {
         white.add(new King(4, 0));
