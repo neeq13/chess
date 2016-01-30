@@ -12,9 +12,18 @@ public class Bishop extends Figure {
         this.shName = 'B';
     }
 
+    public boolean proverka(int x, int y){
+        if (!ff.proverka(x, y)) {
+            if (Math.abs(y - this.y) == Math.abs(x - this.x)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void setPosition(int x, int y) {
-        if (Math.abs(y - this.y) == Math.abs(x - this.x)) {
+        if (proverka(x, y)) {
             this.y = y;
             this.x = x;
         }
