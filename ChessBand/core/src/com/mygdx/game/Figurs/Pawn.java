@@ -29,6 +29,7 @@ public class Pawn extends Figure {
     public void setPosition(int x, int y) {
         if (proverka(x, y)) {
             this.y = y;
+            hasMoved = true;
         }
     }
 }
