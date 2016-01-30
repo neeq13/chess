@@ -7,8 +7,8 @@ import com.mygdx.game.Field;
  */
 public class Rook extends Figure {
 
-    public Rook(char color, int x, int y) {
-        super(color, x, y);
+    public Rook(int x, int y) {
+        super(x, y);
         this.name = "rook";
         this.shName = 'R';
     }

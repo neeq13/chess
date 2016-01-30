@@ -5,8 +5,8 @@ package com.mygdx.game.Figurs;
  */
 public class Pawn extends Figure {
 
-    public Pawn(char color, int x, int y) {
-        super(color, x, y);
+    public Pawn(int x, int y) {
+        super(x, y);
         this.name = "pawn";
         this.shName = 'p';
     }
@@ -14,10 +14,8 @@ public class Pawn extends Figure {
     @Override
     public boolean proverka(int x, int y) {
         if (!ff.proverka(x, y))
-            if(((y - this.y > 0)&& (y - this.y < 3)&&(this.x == x)&&(color == 'w')&& !isHasMoved())||
-                    ((this.y - y > 0) && (this.y - y < 3)&&(this.x == x)&&(color == 'b'))&&!isHasMoved()||
-                    ((y - this.y == 1)&&(this.x == x)&&(color == 'w')&& isHasMoved())||
-                    ((this.y - y == 1)&&(this.x == x)&&(color == 'b'))&&isHasMoved()) {
+            if(((y - this.y > 0)&& (y - this.y < 3)&&(this.x == x)&& !isHasMoved())||
+                    ((y - this.y == 1)&&(this.x == x)&& isHasMoved())) {
                 return true;
             }
         return false;

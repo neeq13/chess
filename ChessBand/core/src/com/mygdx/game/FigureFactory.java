@@ -11,24 +11,36 @@ import java.util.ArrayList;
  * Created by Белл on 27.01.2016.
  */
 public class FigureFactory {
-// создаем два массива фигур черные и белые
-    public static ArrayList<Figure> white = new ArrayList<Figure>();
-    private char color = 'w';
 
-    public FigureFactory() {
+    public static ArrayList<Figure> white = new ArrayList<Figure>();
+
+    private char color;
+
+
+    public FigureFactory(char color) {
+        this.color = color;
     }
+
+    public char getColor() {
+        return color;
+    }
+
+    public void setColor(char color) {
+        this.color = color;
+    }
+    
 // заполняем массивы фигурами
     public void initFigure() {
-        white.add(new King(color, 4, 0));
-        white.add(new Queen(color, 3, 0));
-        white.add(new Rook(color, 0, 0));
-        white.add(new Rook(color, 7, 0));
-        white.add(new Knight(color, 1, 0));
-        white.add(new Knight(color, 6, 0));
-        white.add(new Bishop(color, 2, 0));
-        white.add(new Bishop(color, 5, 0));
+        white.add(new King(4, 0));
+        white.add(new Queen(3, 0));
+        white.add(new Rook(0, 0));
+        white.add(new Rook(7, 0));
+        white.add(new Knight(1, 0));
+        white.add(new Knight(6, 0));
+        white.add(new Bishop(2, 0));
+        white.add(new Bishop(5, 0));
         for (int i = 0; i < 8; i++) {
-            white.add(new Pawn(color, i, 1));
+            white.add(new Pawn(i, 1));
         }
     }
 //проверяем стоит ли во входных координатах наша фигура(пока проверка по белым фигурам идет)

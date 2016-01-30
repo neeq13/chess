@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class King extends Figure {
 
-    public King(char color, int x, int y) {
-        super(color, x, y);
+    public King(int x, int y) {
+        super(x, y);
         this.name = "king";
         this.shName = 'K';
     }
