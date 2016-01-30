@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.mygdx.game.Figurs.Figure;
+
 /**
  * Created by Алексей on 27.01.2016.
  */

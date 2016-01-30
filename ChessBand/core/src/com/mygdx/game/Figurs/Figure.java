@@ -1,6 +1,5 @@
 package com.mygdx.game.Figurs;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.FigureFactory;
 import com.mygdx.game.Point;
 
 import java.util.ArrayList;

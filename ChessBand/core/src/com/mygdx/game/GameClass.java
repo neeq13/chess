@@ -91,10 +91,10 @@ public class GameClass extends ApplicationAdapter {
 
         if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1 &&
                 figures.white.get(selectIndex).isChangePosition(mouseCellX, mouseCellY)) {
-
+            field.setXO(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), null);
             if (mouseCellX >= 0 && mouseCellY >= 0 && mouseCellX < 8 && mouseCellY < 8) {//Условие запрета выхода за границу поля
                 figures.white.get(selectIndex).setPosition(mouseCellX, mouseCellY);
-                field.setXO(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), null);
+
             }
             figures.white.get(selectIndex).resetLight();
             selectIndex = -1;
