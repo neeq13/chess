@@ -16,10 +16,6 @@ public class GameClass extends ApplicationAdapter {
 
     FigureFactory figures = new FigureFactory();
 
-//хочу массивы с фигурами перенести в класс фигур фактори
-//    public static Figure[] white = new Figure[16];
-//    public static Figure[] black = new Figure[16];
-
     Field field = new Field();
 
     int mouseX;
@@ -86,74 +82,85 @@ public class GameClass extends ApplicationAdapter {
         mouseCellX = mouseX / 60;
         mouseCellY = mouseY / 60;
 
-        if (selectIndex == -1) for (Figure figure : figures.white) {
-            if (figure.getX() == mouseCellX && figure.getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                selectIndex = figures.white.indexOf(figure);
-                for (int i = 0; i < figures.white.size(); i++) {
-                    if (figures.white.get(i).getX() == mouseCellX && figures.white.get(i).getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                        figures.white.get(i).light();
-                        selectIndex = i;
-                        break;
-                    }
+//      if (selectIndex == -1)
+//          for (Figure figure : figures.white) {
+//            if (figure.getX() == mouseCellX && figure.getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+//                selectIndex = figures.white.indexOf(figure);
+//                for (int i = 0; i < figures.white.size(); i++) {
+//                    if (figures.white.get(i).getX() == mouseCellX && figures.white.get(i).getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+//                        figures.white.get(i).light();
+//                        selectIndex = i;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+        if (selectIndex == -1) {
+            for (int i = 0; i < figures.white.size(); i++) {
+                if (figures.white.get(i).getX() == mouseCellX && figures.white.get(i).getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+                    figures.white.get(i).light();
+                    selectIndex = i;
+                    break;
                 }
             }
         }
 
+
         if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1) {
-            int lengthY = Math.abs(mouseCellY - figures.white.get(selectIndex).getY());
-            int lengthX = Math.abs(mouseCellX - figures.white.get(selectIndex).getX());
-            length = (lengthY > lengthX) ? lengthY : lengthX;
-            int rokirovkaLength = field.getFieldSize() - 4;
-
-            if (mouseCellX - figures.white.get(selectIndex).getX() > 0) {
-                vx = 1;
-                --rokirovkaLength;
-                //char rookFind = field[field.getFieldSize()]
-            } else if (mouseCellX - figures.white.get(selectIndex).getX() < 0) {
-                vx = -1;
-            } else {
-                vx = 0;
-            }
-            if (mouseCellY - figures.white.get(selectIndex).getY() > 0) {
-                vy = 1;
-            } else if (mouseCellY - figures.white.get(selectIndex).getY() < 0) {
-                vy = -1;
-            } else {
-                vy = 0;
-            }
-
-            if (figures.white.get(selectIndex).isChangePosition(mouseCellX, mouseCellY) && field.isCellEmpty(mouseCellY, mouseCellX)) {
-                field.setXO(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), null);
-                if ((field.checkLine(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), vx, vy, length)) ||
-                        (figures.white.get(selectIndex).getShName() == 'N')) {
-                    /*
-                    ** заготовка для рокировки
-                    ** TODO: проверить что линия свободна (в ту сторону, куда пошла мышь)+
-                    * найти на последней клетке ладью+
-                    * проверить, чтобы ладья не ходила+
-                    * проверить, чтобы не было шаха
-                    * проверить, чтобы поле не было под ударом
-                    * переместить короля и ладью
-                     */
-                    if ((figures.white.get(selectIndex).getShName() == 'K') &&
-                            (!figures.white.get(selectIndex).isHasMoved()) &&
-                            (field.checkLine(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), vx, 0, rokirovkaLength))) {
-                        for (Figure rook : figures.white) { //не нравится, надо сделать поле, которое в клетку помещает объект, чтобы можно было извлечь легко
-                            int newX = figures.white.get(selectIndex).getX() + rokirovkaLength * vx;
-                            int newY = figures.white.get(selectIndex).getY();
-                            if (rook.getX() == newX && rook.getY() == newY && rook.getName() == "rook" &&
-                                    rook.getColor() == figures.white.get(selectIndex).getColor() && !rook.isHasMoved()) {
-                                System.out.println("Это ладья");
-                            }
-                        }
-                        System.out.println("Можно делать рокировку ");
-
-                    }
-                    figures.white.get(selectIndex).setPosition(mouseCellX, mouseCellY);
-                    figures.white.get(selectIndex).setHasMoved(true);
-                    field.setXO(mouseCellY, mouseCellX, figures.white.get(selectIndex));
-                }
-            }
+//            int lengthY = Math.abs(mouseCellY - figures.white.get(selectIndex).getY());
+//            int lengthX = Math.abs(mouseCellX - figures.white.get(selectIndex).getX());
+//            length = (lengthY > lengthX) ? lengthY : lengthX;
+//            int rokirovkaLength = field.getFieldSize() - 4;
+//
+//            if (mouseCellX - figures.white.get(selectIndex).getX() > 0) {
+//                vx = 1;
+//                --rokirovkaLength;
+//                //char rookFind = field[field.getFieldSize()]
+//            } else if (mouseCellX - figures.white.get(selectIndex).getX() < 0) {
+//                vx = -1;
+//            } else {
+//                vx = 0;
+//            }
+//            if (mouseCellY - figures.white.get(selectIndex).getY() > 0) {
+//                vy = 1;
+//            } else if (mouseCellY - figures.white.get(selectIndex).getY() < 0) {
+//                vy = -1;
+//            } else {
+//                vy = 0;
+//            }
+//
+//            if (figures.white.get(selectIndex).isChangePosition(mouseCellX, mouseCellY) && field.isCellEmpty(mouseCellY, mouseCellX)) {
+//                field.setXO(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), null);
+//                if ((field.checkLine(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), vx, vy, length)) ||
+//                        (figures.white.get(selectIndex).getShName() == 'N')) {
+//                    /*
+//                    ** заготовка для рокировки
+//                    ** TODO: проверить что линия свободна (в ту сторону, куда пошла мышь)+
+//                    * найти на последней клетке ладью+
+//                    * проверить, чтобы ладья не ходила+
+//                    * проверить, чтобы не было шаха
+//                    * проверить, чтобы поле не было под ударом
+//                    * переместить короля и ладью
+//                     */
+//                    if ((figures.white.get(selectIndex).getShName() == 'K') &&
+//                            (!figures.white.get(selectIndex).isHasMoved()) &&
+//                            (field.checkLine(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), vx, 0, rokirovkaLength))) {
+//                        for (Figure rook : figures.white) { //не нравится, надо сделать поле, которое в клетку помещает объект, чтобы можно было извлечь легко
+//                            int newX = figures.white.get(selectIndex).getX() + rokirovkaLength * vx;
+//                            int newY = figures.white.get(selectIndex).getY();
+//                            if (rook.getX() == newX && rook.getY() == newY && rook.getName() == "rook" &&
+//                                    rook.getColor() == figures.white.get(selectIndex).getColor() && !rook.isHasMoved()) {
+//                                System.out.println("Это ладья");
+//                            }
+//                        }
+//                        System.out.println("Можно делать рокировку ");
+//
+//                    }
+//                    figures.white.get(selectIndex).setPosition(mouseCellX, mouseCellY);
+//                    figures.white.get(selectIndex).setHasMoved(true);
+//                    field.setXO(mouseCellY, mouseCellX, figures.white.get(selectIndex));
+//                }
+//            }
 
             if (mouseCellX >= 0 && mouseCellY >= 0 && mouseCellX < 8 && mouseCellY < 8)//Условие запрета выхода за границу поля
                 figures.white.get(selectIndex).setPosition(mouseCellX, mouseCellY);

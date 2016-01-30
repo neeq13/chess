@@ -9,7 +9,7 @@ public class Bishop extends Figure {
     public Bishop(char color, int x, int y) {
         super(color, x, y);
         this.name = "bishop";
-        this.shName = 'B';
+
     }
 
     public boolean proverka(int x, int y){
