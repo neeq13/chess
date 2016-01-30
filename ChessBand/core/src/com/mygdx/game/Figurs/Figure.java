@@ -10,12 +10,9 @@ public abstract class Figure {
     protected int y;
     protected String name;
     protected char shName;
-    FigureFactory ff = new FigureFactory();
-    protected char color;
+    FigureFactory ff = new FigureFactory('w');
 
-
-    Figure(char color, int x, int y) {
-        this.color = color;
+    Figure(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -42,10 +39,6 @@ public abstract class Figure {
 
     public char getShName() {
         return shName;
-    }
-
-    public char getColor() {
-        return color;
     }
 
     public String getName() {

@@ -8,8 +8,8 @@ import com.mygdx.game.Field;
  */
 public class Queen extends Figure {
 
-    public Queen(char color, int x, int y) {
-        super(color, x, y);
+    public Queen(int x, int y) {
+        super(x, y);
         this.name = "queen";
         this.shName = 'Q';
     }
