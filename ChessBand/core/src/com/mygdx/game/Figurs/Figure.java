@@ -1,36 +1,56 @@
 package com.mygdx.game.Figurs;
-
-import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.FigureFactory;
+import com.mygdx.game.Point;
 
 import java.util.ArrayList;
 
-/**
- * Created by Алексей on 23.01.2016.
- */
+
 public abstract class Figure {
     protected int x;
     protected int y;
+    protected String name;
+    protected char shName;
+    FigureFactory ff = new FigureFactory();
+    protected char color;
 
 
-
-    protected Texture texture;
-    protected boolean isWasTurn;
-    protected boolean isWhite = true;
-
-    public static int[][] field = new int[8][8];
-
-    public Figure(int x, int y, Texture texture, boolean isWhite) {
+    Figure(char color, int x, int y) {
+        this.color = color;
         this.x = x;
         this.y = y;
-        this.texture = texture;
-        this.isWhite = isWhite;
-        if (isWhite) field[y][x] = 1;
-        else field[y][x] = 2;
-        isWasTurn = false;
     }
 
+    protected ArrayList<Point> podsvetka = new ArrayList<Point>();
 
+    public ArrayList<Point> getPodsvetka() {
+        return podsvetka;
+    }
 
+    public void setPodsvetka(ArrayList<Point> podsvetka) {
+        this.podsvetka = podsvetka;
+    }
+
+    public boolean isHasMoved() {
+        return hasMoved;
+    }
+
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
+    }
+
+    protected boolean hasMoved = false;
+
+    public char getShName() {
+        return shName;
+    }
+
+    public char getColor() {
+        return color;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public int getX() {
         return x;
@@ -43,30 +63,34 @@ public abstract class Figure {
     public int getY() {
         return y;
     }
+    // заполняем массив точек с подсветкой
+    public void light() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (proverka(i, j)) {
+                    podsvetka.add(new Point(i, j));
+                }
+            }
+        }
+    }
+// очищаем массив от фигур
+    public void resetLight() {
+        podsvetka.clear();
+    }
+// абстрактные методы, установка фигуры в новые координаты и проверка на ход фигуры
+    public abstract void setPosition(int x, int y);
 
-    public void setY(int y) {
-        this.y = y;
+    public boolean isChangePosition(int x, int y) {
+        if(this.x != x || this.y != y) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public Texture getTexture() {
-        return texture;
-    }
-
-    public void setTexture(Texture texture) {
-        this.texture = texture;
-    }
-
-//    public void setPosition(int x, int y) {
-//        if (y - this.y == 1 && x-this.x == 1) {
-//            this.y = y++;
-//            this.x = x++;
-//        }
-//    }
-//
+    public abstract boolean proverka(int x, int y);
 
 
     public abstract boolean setPosition(int x, int y);
 
-    //Все возможные ходы
-    public abstract int[][] availableMoves();
 }

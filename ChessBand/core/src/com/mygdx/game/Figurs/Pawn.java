@@ -1,46 +1,36 @@
 package com.mygdx.game.Figurs;
 
-import com.badlogic.gdx.graphics.Texture;
-
 /**
- * Created by Алексей on 24.01.2016.
+ * Created by Алексей on 23.01.2016.
  */
 public class Pawn extends Figure {
-    public Pawn(int x, int y, Texture texture, boolean isWhite) {
-        super(x, y, texture, isWhite);
+
+    public Pawn(char color, int x, int y) {
+        super(color, x, y);
+        this.name = "pawn";
+        this.shName = 'p';
     }
 
     @Override
-    public boolean setPosition(int x, int y) {
-
-        if (field[y][x] == 0 && (y - this.y == 1 && this.x == x)) {
-            field[this.y][this.x] = 0;
-            this.y = y;
-            this.x = x;
-            if (isWhite) field[this.y][this.x] = 1;
-            else field[this.y][this.x] = 2;
-            isWasTurn = true;
-            return true;
-        } else if (field[y][x] == 0 && (y - this.y == 2 && this.x == x && !isWasTurn)) {
-            field[this.y][this.x] = 0;
-            this.y = y;
-            this.x = x;
-            if (isWhite) field[this.y][this.x] = 1;
-            else field[this.y][this.x] = 2;
-            isWasTurn = true;
-            return true;
-        }
-
+    public boolean proverka(int x, int y) {
+        if (!ff.proverka(x, y))
+            if(((y - this.y > 0)&& (y - this.y < 3)&&(this.x == x)&&(color == 'w')&& !isHasMoved())||
+                    ((this.y - y > 0) && (this.y - y < 3)&&(this.x == x)&&(color == 'b'))&&!isHasMoved()||
+                    ((y - this.y == 1)&&(this.x == x)&&(color == 'w')&& isHasMoved())||
+                    ((this.y - y == 1)&&(this.x == x)&&(color == 'b'))&&isHasMoved()) {
+                return true;
+            }
         return false;
+
     }
 
-    //У Пешки их максимум 6(Пока без провеки на врагов и взятий на проходе)
     @Override
-    public int[][] availableMoves() {
-        int[][] result = new int[8][8];
-        if (field[y + 1][x] == 0 && y < 7) result[y + 1][x] = 1;
-        if (field[y + 2][x] == 0 && !isWasTurn) result[y + 2][x] = 1;
-
-        return result;
+    public void setPosition(int x, int y) {
+        if (proverka(x, y)) {
+            this.y = y;
+        }
     }
 }
+
+
+

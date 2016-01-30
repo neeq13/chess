@@ -1,32 +1,35 @@
 
 package com.mygdx.game.Figurs;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.Field;
 
 /**
  * Created by Алексей on 23.01.2016.
  */
 public class Queen extends Figure {
 
-    public Queen(int x, int y, Texture texture, boolean isWhite) {
-        super(x, y, texture, isWhite);
+    public Queen(char color, int x, int y) {
+        super(color, x, y);
+        this.name = "queen";
+        this.shName = 'Q';
     }
 
-
-    @Override
-    public boolean setPosition(int x, int y) {
-        if (Math.abs(y-this.y) <=8&& x - this.x == 0|| y-this.y == 0&& Math.abs(x - this.x) <=8 ||y - this.y == x - this.x || -(y - this.y) == (x - this.x) ){
-            this.y = y;
-            this.x = x;
+    public boolean proverka(int x, int y) {
+        if (!ff.proverka(x,y))
+        if (Math.abs(y-this.y) <= Field.getFieldSize() && x - this.x == 0||
+                y-this.y == 0 && Math.abs(x - this.x) <= Field.getFieldSize() ||
+                Math.abs(y - this.y) == Math.abs(x - this.x)){
             return true;
         }
         return false;
     }
 
     @Override
-    public int[][] availableMoves() {
-        return null;
+    public void setPosition(int x, int y) {
+        if (proverka(x,y)){
+            this.y = y;
+            this.x = x;
+        }
+
     }
-
-
 }

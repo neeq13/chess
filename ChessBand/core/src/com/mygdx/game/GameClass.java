@@ -11,48 +11,33 @@ import com.mygdx.game.Figurs.*;
 public class GameClass extends ApplicationAdapter {
     SpriteBatch batch;
     Texture pole;
-    Texture smile;
     Texture smileEnd;
-    Texture pawnW;
-    Texture allocation;
-    Texture bishopW;
-    Texture knightW;
-    Texture kingW;
+    Texture lightField;
     Texture box;
 
-    public static Figure[] white = new Figure[11];
+    FigureFactory figures = new FigureFactory();
 
+    Field field = new Field();
 
     int mouseX;
     int mouseY;
     int mouseCellX;
     int mouseCellY;
-
+    int vx;
+    int vy;
+    int length = 0;
     int selectIndex = -1;
-
 
     @Override
     public void create() {
+
         batch = new SpriteBatch();
-        pole = new Texture("pole.png");
-        smile = new Texture("smile.png");
-        smileEnd = new Texture("smileEnd.png");
-        pawnW = new Texture("pawnw.png");
-        bishopW = new Texture("bishopw.png");
-        allocation = new Texture("allocation.png");
-        knightW = new Texture("knightw.png");
-        kingW = new Texture("kingw.png");
+        pole = new Texture("size.png");
+        Field.initField();
+        Field.printField();
+        lightField = new Texture("allocation.png");
+        figures.initFigure();
         box = new Texture("box.jpg");
-
-        for (int i = 0; i < 8; i++) {
-            white[i] = new Pawn(i, 1, pawnW, true);
-        }
-        white[8] = new Bishop(3, 5, bishopW, true);
-        white[9] = new Knight(5, 0, knightW, true);
-        white[10] = new King(0, 7, kingW, true);
-        ;
-
-
     }
 
     @Override
@@ -61,7 +46,6 @@ public class GameClass extends ApplicationAdapter {
         Gdx.gl.glClearColor(0, 0, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if ((i + j) % 2 != 0) {
@@ -72,21 +56,122 @@ public class GameClass extends ApplicationAdapter {
             }
         }
 
-        for (int i = 0; i < 8; i++) {
-            if (i == selectIndex) continue;
-            batch.draw(white[i].getTexture(), white[i].getX() * 60, white[i].getY() * 60);
+        for (Figure figure: figures.white) {
+            Texture texture = new Texture(figure.getName() + figure.getColor() + ".png");
+            batch.draw(texture, figure.getX() * 60, figure.getY() * 60);
+            field.setXO(figure.getY(), figure.getX(), figure);
         }
 
-        batch.draw(white[8].getTexture(), white[8].getX() * 60, white[8].getY() * 60);
-        batch.draw(white[9].getTexture(), white[9].getX() * 60, white[9].getY() * 60);
-        batch.draw(white[10].getTexture(), white[10].getX() * 60, white[10].getY() * 60);
+        //field.printField();
 
         if (selectIndex > -1) {
-            batch.draw(white[selectIndex].getTexture(), white[selectIndex].getX() * 60, white[selectIndex].getY() * 60);
+            Texture texture = new Texture(figures.white.get(selectIndex).getName() + figures.white.get(selectIndex).getColor() + ".png");
+            //System.out.println(texture);
+            batch.draw(texture, mouseX - 30, mouseY - 30);
+            for (int i = 0; i < figures.white.get(selectIndex).getPodsvetka().size(); i++) {
+                batch.draw(lightField, figures.white.get(selectIndex).getPodsvetka().get(i).getX() * 60, figures.white.get(selectIndex).getPodsvetka().get(i).getY() * 60);
+            }
+            //batch.draw(texture, figures.white.get(selectIndex).getX() * 60, figures.white.get(selectIndex).getY() * 60);
+            batch.draw(texture, mouseX - 30, mouseY - 30);
+        }
 
-            paintAllocation(white[selectIndex].availableMoves());
+        batch.end();
+    }
+
+    public void update() {
+        mouseX = Gdx.input.getX();
+        mouseY = 480 - Gdx.input.getY();
+        mouseCellX = mouseX / 60;
+        mouseCellY = mouseY / 60;
+
+//      if (selectIndex == -1)
+//          for (Figure figure : figures.white) {
+//            if (figure.getX() == mouseCellX && figure.getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+//                selectIndex = figures.white.indexOf(figure);
+//                for (int i = 0; i < figures.white.size(); i++) {
+//                    if (figures.white.get(i).getX() == mouseCellX && figures.white.get(i).getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+//                        figures.white.get(i).light();
+//                        selectIndex = i;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+        if (selectIndex == -1) {
+            for (int i = 0; i < figures.white.size(); i++) {
+                if (figures.white.get(i).getX() == mouseCellX && figures.white.get(i).getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+                    figures.white.get(i).light();
+                    selectIndex = i;
+                    break;
+                }
+            }
+        }
+
+
+        if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1) {
+//            int lengthY = Math.abs(mouseCellY - figures.white.get(selectIndex).getY());
+//            int lengthX = Math.abs(mouseCellX - figures.white.get(selectIndex).getX());
+//            length = (lengthY > lengthX) ? lengthY : lengthX;
+//            int rokirovkaLength = field.getFieldSize() - 4;
+//
+//            if (mouseCellX - figures.white.get(selectIndex).getX() > 0) {
+//                vx = 1;
+//                --rokirovkaLength;
+//                //char rookFind = field[field.getFieldSize()]
+//            } else if (mouseCellX - figures.white.get(selectIndex).getX() < 0) {
+//                vx = -1;
+//            } else {
+//                vx = 0;
+//            }
+//            if (mouseCellY - figures.white.get(selectIndex).getY() > 0) {
+//                vy = 1;
+//            } else if (mouseCellY - figures.white.get(selectIndex).getY() < 0) {
+//                vy = -1;
+//            } else {
+//                vy = 0;
+//            }
+//
+//            if (figures.white.get(selectIndex).isChangePosition(mouseCellX, mouseCellY) && field.isCellEmpty(mouseCellY, mouseCellX)) {
+//                field.setXO(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), null);
+//                if ((field.checkLine(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), vx, vy, length)) ||
+//                        (figures.white.get(selectIndex).getShName() == 'N')) {
+//                    /*
+//                    ** заготовка для рокировки
+//                    ** TODO: проверить что линия свободна (в ту сторону, куда пошла мышь)+
+//                    * найти на последней клетке ладью+
+//                    * проверить, чтобы ладья не ходила+
+//                    * проверить, чтобы не было шаха
+//                    * проверить, чтобы поле не было под ударом
+//                    * переместить короля и ладью
+//                     */
+//                    if ((figures.white.get(selectIndex).getShName() == 'K') &&
+//                            (!figures.white.get(selectIndex).isHasMoved()) &&
+//                            (field.checkLine(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), vx, 0, rokirovkaLength))) {
+//                        for (Figure rook : figures.white) { //не нравится, надо сделать поле, которое в клетку помещает объект, чтобы можно было извлечь легко
+//                            int newX = figures.white.get(selectIndex).getX() + rokirovkaLength * vx;
+//                            int newY = figures.white.get(selectIndex).getY();
+//                            if (rook.getX() == newX && rook.getY() == newY && rook.getName() == "rook" &&
+//                                    rook.getColor() == figures.white.get(selectIndex).getColor() && !rook.isHasMoved()) {
+//                                System.out.println("Это ладья");
+//                            }
+//                        }
+//                        System.out.println("Можно делать рокировку ");
+//
+//                    }
+//                    figures.white.get(selectIndex).setPosition(mouseCellX, mouseCellY);
+//                    figures.white.get(selectIndex).setHasMoved(true);
+//                    field.setXO(mouseCellY, mouseCellX, figures.white.get(selectIndex));
+//                }
+//            }
+
+            if (mouseCellX >= 0 && mouseCellY >= 0 && mouseCellX < 8 && mouseCellY < 8)//Условие запрета выхода за границу поля
+                figures.white.get(selectIndex).setPosition(mouseCellX, mouseCellY);
+            figures.white.get(selectIndex).resetLight();
+
+            selectIndex = -1;
 
         }
+    }
 
         batch.draw(box,500,370,180,90);
         batch.draw(box,500,20,180,90);
@@ -105,43 +190,5 @@ public class GameClass extends ApplicationAdapter {
 
         batch.draw(kingW,510,420,30,30);
         batch.draw(bishopW,540,420,30,30);
-
-        batch.end();
-    }
-
-
-    public void update() {
-        mouseX = Gdx.input.getX();
-        mouseY = 480 - Gdx.input.getY();
-
-        mouseCellX = mouseX / 60;
-        mouseCellY = mouseY / 60;
-
-
-        if (selectIndex == -1) {
-            for (int i = 0; i < white.length; i++) {
-                if (white[i].getX() == mouseCellX && white[i].getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                    selectIndex = i;
-                    break;
-                }
-            }
-        }
-
-        if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1) {
-            white[selectIndex].setPosition(mouseCellX, mouseCellY);
-
-            selectIndex = -1;
-        }
-    }
-
-    private void paintAllocation(int[][] stroke) {
-        for (int i = 0; i < stroke.length; i++) {
-            for (int j = 0; j < stroke.length; j++) {
-                if (stroke[i][j] != 0) {
-                    batch.draw(allocation, j * 60, i * 60);
-                }
-            }
-        }
-    }
 
 }
