@@ -1,4 +1,5 @@
 package com.mygdx.game.Figurs;
+import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.FigureFactory;
 import com.mygdx.game.Point;
 
@@ -10,6 +11,7 @@ public abstract class Figure {
     protected int y;
     protected String name;
     protected char shName;
+    public Texture figtex;
 
     Figure(int x, int y) {
         this.x = x;

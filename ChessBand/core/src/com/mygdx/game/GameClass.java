@@ -32,6 +32,9 @@ public class GameClass extends ApplicationAdapter {
         Field.printField();
         lightField = new Texture("allocation.png");
         figures.initFigure();
+        for (Figure fig : figures.white) {
+            fig.figtex = new Texture(fig.getName() + figures.getColor() + ".png");
+        }
     }
 
     @Override
@@ -51,8 +54,7 @@ public class GameClass extends ApplicationAdapter {
         }
 
         for (Figure figure: figures.white) {
-            Texture texture = new Texture(figure.getName() + figures.getColor() + ".png");
-            batch.draw(texture, figure.getX() * 60, figure.getY() * 60);
+            batch.draw(figure.figtex, figure.getX() * 60, figure.getY() * 60);
             field.setXO(figure.getY(), figure.getX(), figure);
         }
 
@@ -89,11 +91,10 @@ public class GameClass extends ApplicationAdapter {
 
         if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1 &&
                 figures.white.get(selectIndex).isChangePosition(mouseCellX, mouseCellY)) {
-            field.setXO(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), null);
-
 
             if (mouseCellX >= 0 && mouseCellY >= 0 && mouseCellX < 8 && mouseCellY < 8) {//Условие запрета выхода за границу поля
                 figures.white.get(selectIndex).setPosition(mouseCellX, mouseCellY);
+                field.setXO(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), null);
             }
             figures.white.get(selectIndex).resetLight();
             selectIndex = -1;
