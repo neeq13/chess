@@ -18,9 +18,9 @@ public class GameClass extends ApplicationAdapter {
     Texture bishopW;
     Texture knightW;
     Texture kingW;
+    Texture box;
 
-
-    Figure[] white = new Figure[11];
+    public static Figure[] white = new Figure[11];
 
 
     int mouseX;
@@ -42,6 +42,7 @@ public class GameClass extends ApplicationAdapter {
         allocation = new Texture("allocation.png");
         knightW = new Texture("knightw.png");
         kingW = new Texture("kingw.png");
+        box = new Texture("box.jpg");
 
         for (int i = 0; i < 8; i++) {
             white[i] = new Pawn(i, 1, pawnW, true);
@@ -86,6 +87,25 @@ public class GameClass extends ApplicationAdapter {
             paintAllocation(white[selectIndex].availableMoves());
 
         }
+
+        batch.draw(box,500,370,180,90);
+        batch.draw(box,500,20,180,90);
+
+        batch.draw(pawnW,510,380,30,30);
+        batch.draw(pawnW,520,380,30,30);
+        batch.draw(pawnW,530,380,30,30);
+        batch.draw(pawnW,540,380,30,30);
+        batch.draw(pawnW,550,380,30,30);
+        batch.draw(pawnW,560,380,30,30);
+        batch.draw(pawnW,570,380,30,30);
+        batch.draw(pawnW,580,380,30,30);
+
+        batch.draw(knightW,620,380,30,30);
+        batch.draw(knightW,630,380,30,30);
+
+        batch.draw(kingW,510,420,30,30);
+        batch.draw(bishopW,540,420,30,30);
+
         batch.end();
     }
 
