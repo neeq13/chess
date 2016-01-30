@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * Created by Алексей on 23.01.2016.
  */
 public abstract class Figure {
+//координаты
     protected int x;
     protected int y;
     FigureFactory ff = new FigureFactory();
