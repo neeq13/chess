@@ -51,6 +51,7 @@ public class GameClass extends ApplicationAdapter {
         white[9] = new Knight(5, 0, knightW, true);
         white[10] = new King(0, 7, kingW, true);
 
+
     }
 
     @Override
