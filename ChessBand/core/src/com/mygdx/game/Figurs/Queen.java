@@ -1,12 +1,15 @@
 
 package com.mygdx.game.Figurs;
+
+import com.badlogic.gdx.graphics.Texture;
+
 /**
  * Created by Алексей on 23.01.2016.
  */
 public class Queen extends Figure {
 
-    public Queen(int x, int y) {
-        super(x, y);
+    public Queen(int x, int y, Texture texture, boolean isWhite) {
+        super(x, y, texture, isWhite);
     }
 
 
@@ -18,6 +21,11 @@ public class Queen extends Figure {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int[][] availableMoves() {
+        return null;
     }
 
 
