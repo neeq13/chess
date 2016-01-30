@@ -29,7 +29,7 @@ public class GameClass extends ApplicationAdapter {
     int mouseCellY;
 
     int selectIndex = -1;
-::
+
 
 
     @Override
