@@ -18,7 +18,9 @@ public class Field {
             }
         }
     }
-
+    public static Figure getFigure(int _x, int _y) {
+        return field[_y][_x];
+    }
     public static int getFieldSize() {
         return FIELD_SIZE;
     }
