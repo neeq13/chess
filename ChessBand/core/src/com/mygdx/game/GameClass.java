@@ -6,10 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Figurs.Bishop;
-import com.mygdx.game.Figurs.Figure;
-import com.mygdx.game.Figurs.Pawn;
-import com.mygdx.game.Figurs.Rook;
+import com.mygdx.game.Figurs.*;
 
 public class GameClass extends ApplicationAdapter {
     SpriteBatch batch;
@@ -19,9 +16,11 @@ public class GameClass extends ApplicationAdapter {
     Texture pawnW;
     Texture allocation;
     Texture bishopW;
+    Texture knightW;
+    Texture kingW;
 
 
-    Figure[] white = new Figure[9];
+    Figure[] white = new Figure[11];
 
 
     int mouseX;
@@ -41,11 +40,16 @@ public class GameClass extends ApplicationAdapter {
         pawnW = new Texture("pawnw.png");
         bishopW = new Texture("bishopw.png");
         allocation = new Texture("allocation.png");
+        knightW = new Texture("knightw.png");
+        kingW = new Texture("kingw.png");
 
         for (int i = 0; i < 8; i++) {
             white[i] = new Pawn(i, 1, pawnW, true);
         }
         white[8] = new Bishop(3, 5, bishopW, true);
+        white[9] = new Knight(5, 0, knightW, true);
+        white[10] = new King(0, 7, kingW, true);
+
     }
 
     @Override
@@ -71,9 +75,12 @@ public class GameClass extends ApplicationAdapter {
         }
 
         batch.draw(white[8].getTexture(), white[8].getX() * 60, white[8].getY() * 60);
+        batch.draw(white[9].getTexture(), white[9].getX() * 60, white[9].getY() * 60);
+        batch.draw(white[10].getTexture(), white[10].getX() * 60, white[10].getY() * 60);
 
         if (selectIndex > -1) {
             batch.draw(white[selectIndex].getTexture(), white[selectIndex].getX() * 60, white[selectIndex].getY() * 60);
+
             paintAllocation(white[selectIndex].availableMoves());
 
         }
@@ -90,7 +97,7 @@ public class GameClass extends ApplicationAdapter {
 
 
         if (selectIndex == -1) {
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < white.length; i++) {
                 if (white[i].getX() == mouseCellX && white[i].getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                     selectIndex = i;
                     break;
