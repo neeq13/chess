@@ -3,21 +3,24 @@ package com.mygdx.game;
 import com.mygdx.game.Figurs.Figure;
 
 public class Field {
+    private Figure figure;
     private static final int FIELD_SIZE = 8;
     private int x;
     private int y;
-    public static char[][] field;
-    public static final char freeDot = '*'; // обозначение пустой ячейки
+    private static Figure[][] field;
+    //private static final char freeDot = '*'; // обозначение пустой ячейки
 
     public static void initField()    {
-        field = new char[FIELD_SIZE][FIELD_SIZE];
+        field = new Figure[FIELD_SIZE][FIELD_SIZE];
         for (int i = 0; i < FIELD_SIZE; i++) {
             for (int j = 0; j < FIELD_SIZE; j++) {
-                field[i][j] = freeDot;
+                field[i][j] = null;
             }
         }
     }
-
+    public static Figure getFigure(int _x, int _y) {
+        return field[_y][_x];
+    }
     public static int getFieldSize() {
         return FIELD_SIZE;
     }
@@ -38,16 +41,18 @@ public class Field {
         System.out.print('\n');
     }
 
-    public static void setXO(int _y, int _x, char _ox)
+
+    public static void setXO(int _y, int _x, Figure figure)
     {
-        field[FIELD_SIZE - 1 - _y][_x] = _ox;
+        field[FIELD_SIZE - 1 - _y][_x] = figure;
     }
+
 
     public static boolean isCellEmpty(int _y, int _x)
     {
         // проверка на невыход на границы поля
         if((_x < FIELD_SIZE)&&(_y < FIELD_SIZE)) {
-            if ((field[FIELD_SIZE - 1 - _y][_x] == freeDot) && (_x < FIELD_SIZE && _y < FIELD_SIZE)) {
+            if ((field[FIELD_SIZE - 1 - _y][_x] == null) && (_x < FIELD_SIZE && _y < FIELD_SIZE)) {
                 return true;
             }
         }
