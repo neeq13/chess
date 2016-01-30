@@ -15,11 +15,12 @@ public class Queen extends Figure {
     }
 
     public boolean proverka(int x, int y) {
-        if (!ff.proverka(x,y))
-        if (Math.abs(y-this.y) <= Field.getFieldSize() && x - this.x == 0||
-                y-this.y == 0 && Math.abs(x - this.x) <= Field.getFieldSize() ||
-                Math.abs(y - this.y) == Math.abs(x - this.x)){
-            return true;
+        if (Field.isCellEmpty(y, x)) {
+            if (Math.abs(y - this.y) <= Field.getFieldSize() && x - this.x == 0 ||
+                    y - this.y == 0 && Math.abs(x - this.x) <= Field.getFieldSize() ||
+                    Math.abs(y - this.y) == Math.abs(x - this.x)) {
+                return true;
+            }
         }
         return false;
     }

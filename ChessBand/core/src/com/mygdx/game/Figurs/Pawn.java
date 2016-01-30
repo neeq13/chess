@@ -1,5 +1,7 @@
 package com.mygdx.game.Figurs;
 
+import com.mygdx.game.Field;
+
 /**
  * Created by Алексей on 23.01.2016.
  */
@@ -13,11 +15,12 @@ public class Pawn extends Figure {
 
     @Override
     public boolean proverka(int x, int y) {
-        if (!ff.proverka(x, y))
-            if(((y - this.y > 0)&& (y - this.y < 3)&&(this.x == x)&& !isHasMoved())||
-                    ((y - this.y == 1)&&(this.x == x)&& isHasMoved())) {
+        if (Field.isCellEmpty(y, x)) {
+            if (((y - this.y > 0) && (y - this.y < 3) && (this.x == x) && !isHasMoved()) ||
+                    ((y - this.y == 1) && (this.x == x) && isHasMoved())) {
                 return true;
             }
+        }
         return false;
 
     }
@@ -26,6 +29,7 @@ public class Pawn extends Figure {
     public void setPosition(int x, int y) {
         if (proverka(x, y)) {
             this.y = y;
+            hasMoved = true;
         }
     }
 }

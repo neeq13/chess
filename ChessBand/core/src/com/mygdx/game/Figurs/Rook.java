@@ -14,10 +14,11 @@ public class Rook extends Figure {
     }
 
     public boolean proverka(int x, int y) {
-        if (!ff.proverka(x, y))
+        if (Field.isCellEmpty(y, x)) {
             if(Math.abs(y - this.y) <= Field.getFieldSize() && x - this.x == 0 ||
                     y - this.y == 0 && Math.abs(x - this.x) <= Field.getFieldSize()) {
-            return true;
+                return true;
+            }
         }
         return false;
     }

@@ -50,12 +50,8 @@ public class Field {
 
     public static boolean isCellEmpty(int _y, int _x)
     {
-        // проверка на невыход на границы поля
-        if((_x < FIELD_SIZE)&&(_y < FIELD_SIZE)) {
-            if ((field[FIELD_SIZE - 1 - _y][_x] == null) && (_x < FIELD_SIZE && _y < FIELD_SIZE)) {
-                return true;
-            }
-        }
+        if (field[FIELD_SIZE - 1 -_y][_x] == null)
+            return true;
         return false;
     }
 

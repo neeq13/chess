@@ -10,7 +10,6 @@ public abstract class Figure {
     protected int y;
     protected String name;
     protected char shName;
-    FigureFactory ff = new FigureFactory('w');
 
     Figure(int x, int y) {
         this.x = x;
