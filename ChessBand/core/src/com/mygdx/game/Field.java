@@ -67,7 +67,6 @@ public class Field {
         for(int i=1; i<_l; i++) {
             if (isCellEmpty(Field.getFieldSize() - 1 - _y + i * _vy, _x - i * _vx))
             {
-                System.out.println("Точка " + (_x - i * _vx) + ":" + (_y - i * _vy));
                 points.add(new Point((_x - i * _vx), (_y - i * _vy)));
             } else {
                 break;

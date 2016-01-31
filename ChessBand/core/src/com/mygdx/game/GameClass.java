@@ -29,7 +29,7 @@ public class GameClass extends ApplicationAdapter {
         batch = new SpriteBatch();
         pole = new Texture("size.png");
         Field.initField();
-        Field.printField();
+        //Field.printField();
         lightField = new Texture("allocation.png");
         figures.initFigure();
         for (Figure fig : figures.white) {

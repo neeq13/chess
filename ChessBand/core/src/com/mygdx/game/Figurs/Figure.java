@@ -67,11 +67,13 @@ public abstract class Figure {
     }
     // заполняем массив точек с подсветкой
     public void light() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (proverka(i, j)) {
-                    podsvetka.add(new Point(i, j));
-                }
+        if (length + y > Field.getFieldSize() - 1) {
+            length = Field.getFieldSize() - y;
+        }
+        for (int[] direction : directions) {
+            ArrayList<Point> points = field.checkLine(y, x, direction[0], direction[1], length);
+            for (Point point : points) {
+                podsvetka.add(new Point(point.getX(), point.getY()));
             }
         }
     }
@@ -80,7 +82,12 @@ public abstract class Figure {
         podsvetka.clear();
     }
 // абстрактные методы, установка фигуры в новые координаты и проверка на ход фигуры
-    public abstract void setPosition(int x, int y);
+    public void setPosition(int x, int y) {
+        if (proverka(x, y)) {
+            this.y = y;
+            this.x = x;
+        }
+    }
 
     public boolean isChangePosition(int x, int y) {
         if(this.x != x || this.y != y) {
@@ -90,20 +97,16 @@ public abstract class Figure {
         }
     }
 
-    public abstract boolean proverka(int x, int y);
-
-    public void getDirections() {
+    public boolean proverka(int x, int y) {
         if (length + y > Field.getFieldSize() - 1) {
             length = Field.getFieldSize() - 1- y;
         }
         for (int[] direction : directions) {
-           ArrayList<Point> points = field.checkLine(y,x, direction[0], direction[1], length);
-            for (Point point : points) {
-                System.out.println(point.getX() + ":" + point.getY());
+            if (field.checkLine(y, x, direction[0], direction[1], length).size() > 0) {
+                return true;
             }
         }
+        return false;
     }
-
-
 
 }

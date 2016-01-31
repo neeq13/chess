@@ -16,21 +16,4 @@ public class Bishop extends Figure {
         this.length = 7;
 
     }
-
-    public boolean proverka(int x, int y){
-        if (Field.isCellEmpty(Field.getFieldSize() - 1 - y, x)) {
-            if (Math.abs(y - this.y) == Math.abs(x - this.x)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void setPosition(int x, int y) {
-        if (proverka(x, y)) {
-            this.y = y;
-            this.x = x;
-        }
-    }
 }
