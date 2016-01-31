@@ -11,5 +11,6 @@ public class DesktopLauncher {
 		new LwjglApplication(new GameClass(), config);
 		config.height = 480;
 		config.width = 700;
+		config.title = "Chess";
 	}
 }

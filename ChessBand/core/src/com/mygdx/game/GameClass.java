@@ -12,9 +12,10 @@ public class GameClass extends ApplicationAdapter {
     SpriteBatch batch;
     Texture pole;
     Texture lightField;
-    Texture box;
+    Texture boxField;
 
     FigureFactory figures = new FigureFactory('w');
+    Box box = new Box('w');
 
     Field field = new Field();
 
@@ -33,7 +34,7 @@ public class GameClass extends ApplicationAdapter {
         Field.printField();
         lightField = new Texture("allocation.png");
         figures.initFigure();
-        box = new Texture("box.jpg");
+        boxField = new Texture("box.jpg");
     }
 
     @Override
@@ -42,6 +43,8 @@ public class GameClass extends ApplicationAdapter {
         Gdx.gl.glClearColor(0, 0, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
+
+        //рисуем поле
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if ((i + j) % 2 != 0) {
@@ -52,13 +55,24 @@ public class GameClass extends ApplicationAdapter {
             }
         }
 
+        //рисуем ящики
+        batch.draw(boxField,490,370,200,100);
+        batch.draw(boxField,490,20,200,100);
+
+        //рисуем фигуры
         for (Figure figure: figures.white) {
             Texture texture = new Texture(figure.getName() + figures.getColor() + ".png");
             batch.draw(texture, figure.getX() * 60, figure.getY() * 60);
             field.setXO(figure.getY(), figure.getX(), figure);
         }
 
-        //field.printField();
+        //рисуем срубленые фигуры
+        int l = 0;
+        for (Figure figure: box.whiteBox) {
+            l=l+10;
+            Texture texture1 = new Texture(figure.getName() + figures.getColor() + ".png");
+            batch.draw(texture1, 480 + (l), 380, 30, 30);
+        }
 
         if (selectIndex > -1) {
             Texture texture = new Texture(figures.white.get(selectIndex).getName() + figures.getColor() + ".png");
@@ -66,11 +80,12 @@ public class GameClass extends ApplicationAdapter {
             for (int i = 0; i < figures.white.get(selectIndex).getPodsvetka().size(); i++) {
                 batch.draw(lightField, figures.white.get(selectIndex).getPodsvetka().get(i).getX() * 60, figures.white.get(selectIndex).getPodsvetka().get(i).getY() * 60);
             }
-            //batch.draw(texture, figures.white.get(selectIndex).getX() * 60, figures.white.get(selectIndex).getY() * 60);
+
             batch.draw(texture, mouseX - 30, mouseY - 30);
         }
 
         batch.end();
+
     }
 
     public void update() {
@@ -89,6 +104,12 @@ public class GameClass extends ApplicationAdapter {
             }
         }
 
+        //1-определяем нажата ли мышка;2-добавляем в ArrayList ящика срубленную фигуру;3-удаляем срубленную фигуру с ArrayList фигур
+        if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1 && figures.white.get(selectIndex).isChangePosition(mouseCellX, mouseCellY)){
+            Box.whiteBox.add(figures.white.get(selectIndex));
+            figures.white.remove(figures.white.get(selectIndex));
+        }
+
         if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1 &&
                 figures.white.get(selectIndex).isChangePosition(mouseCellX, mouseCellY)) {
             field.setXO(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), null);
@@ -99,26 +120,10 @@ public class GameClass extends ApplicationAdapter {
             }
             figures.white.get(selectIndex).resetLight();
             selectIndex = -1;
+
         }
     }
 
-        batch.draw(box,500,370,180,90);
-        batch.draw(box,500,20,180,90);
-
-        batch.draw(pawnW,510,380,30,30);
-        batch.draw(pawnW,520,380,30,30);
-        batch.draw(pawnW,530,380,30,30);
-        batch.draw(pawnW,540,380,30,30);
-        batch.draw(pawnW,550,380,30,30);
-        batch.draw(pawnW,560,380,30,30);
-        batch.draw(pawnW,570,380,30,30);
-        batch.draw(pawnW,580,380,30,30);
-
-        batch.draw(knightW,620,380,30,30);
-        batch.draw(knightW,630,380,30,30);
-
-        batch.draw(kingW,510,420,30,30);
-        batch.draw(bishopW,540,420,30,30);
 
 }
 

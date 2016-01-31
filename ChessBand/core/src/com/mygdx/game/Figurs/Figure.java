@@ -48,10 +48,6 @@ public abstract class Figure {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
     }
@@ -65,11 +61,11 @@ public abstract class Figure {
             }
         }
     }
-// очищаем массив от фигур
+    // очищаем массив от фигур
     public void resetLight() {
         podsvetka.clear();
     }
-// абстрактные методы, установка фигуры в новые координаты и проверка на ход фигуры
+    // абстрактные методы, установка фигуры в новые координаты и проверка на ход фигуры
     public abstract void setPosition(int x, int y);
 
     public boolean isChangePosition(int x, int y) {
@@ -83,6 +79,5 @@ public abstract class Figure {
     public abstract boolean proverka(int x, int y);
 
 
-    public abstract boolean setPosition(int x, int y);
 
 }

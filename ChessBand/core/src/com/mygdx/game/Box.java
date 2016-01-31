@@ -9,15 +9,15 @@ import java.util.ArrayList;
 public class Box {
 
     public static ArrayList<Figure> whiteBox = new ArrayList<Figure>();
-    //ArrayList<Figure> blackBox = new ArrayList<Figure>();
 
-    public void Main(){
-        motionFigureBox(0, 0,"white" , GameClass.white[1]);
+    private char color;
+
+    Box(char color) {
+        this.color = color;
     }
 
-    public void motionFigureBox(int _x, int _y, String _color, Figure _figure){
-
-        whiteBox.add(_figure);
-
+    public char getColor() {
+        return color;
     }
+
 }
