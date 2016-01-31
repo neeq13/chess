@@ -7,19 +7,6 @@ public class Knight extends Figure {
         super(x, y);
         this.name = "knight";
         this.shName = 'N';
-<<<<<<< HEAD
-    }
-
-    public boolean proverka(int x, int y) {
-        if (Field.isCellEmpty(Field.getFieldSize() - 1 - y, x)) {
-            if (Math.abs(y - this.y) == 2 && Math.abs(x - this.x) == 1 || Math.abs(y - this.y) == 1 && Math.abs(x - this.x) == 2) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-=======
         this.avialableTurns.add(new Turn(2, 1, false));
         this.avialableTurns.add(new Turn(2, -1, false));
         this.avialableTurns.add(new Turn(1, 2, false));
@@ -30,6 +17,4 @@ public class Knight extends Figure {
         this.avialableTurns.add(new Turn(-2, -1, false));
 
     }
-
->>>>>>> rightNapravl
 }

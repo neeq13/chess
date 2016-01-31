@@ -1,9 +1,6 @@
 package com.mygdx.game.Figurs;
 import com.badlogic.gdx.graphics.Texture;
-<<<<<<< HEAD
-=======
 import com.badlogic.gdx.utils.Array;
->>>>>>> rightNapravl
 import com.mygdx.game.Field;
 import com.mygdx.game.Point;
 import com.mygdx.game.Turn;
@@ -16,7 +13,7 @@ public abstract class Figure {
     protected int y;
     protected String name;
     protected char shName;
-<<<<<<< HEAD
+
     Field field = new Field();
 
     public Texture getFigtex() {
@@ -27,13 +24,9 @@ public abstract class Figure {
         this.figtex = figtex;
     }
 
-    protected Texture figtex;
-    protected int[][] directions = {{0,1},{1,0},{1,1},{-1,-1},{-1,0},{0,-1}};
-    protected int length;
-=======
     public Texture figtex;
     protected Array<Turn> avialableTurns = new Array<Turn>();
->>>>>>> rightNapravl
+
 
     Figure(int x, int y) {
         this.x = x;
@@ -77,15 +70,6 @@ public abstract class Figure {
     }
     // заполняем массив точек с подсветкой
     public void light() {
-<<<<<<< HEAD
-        if (length + y > Field.getFieldSize() - 1) {
-            length = Field.getFieldSize() - y;
-        }
-        for (int[] direction : directions) {
-            ArrayList<Point> points = field.checkLine(y, x, direction[0], direction[1], length);
-            for (Point point : points) {
-                podsvetka.add(new Point(point.getX(), point.getY()));
-=======
         for (Turn avialableTurn : avialableTurns) {
             boolean doContinue = true;
             for (int i = 1; doContinue; i++) {
@@ -105,7 +89,6 @@ public abstract class Figure {
                 if (!avialableTurn.nextStep) {
                     doContinue = false;
                 }
->>>>>>> rightNapravl
             }
         }
     }
@@ -113,11 +96,7 @@ public abstract class Figure {
     public void resetLight() {
         podsvetka.clear();
     }
-<<<<<<< HEAD
-// абстрактные методы, установка фигуры в новые координаты и проверка на ход фигуры
-=======
 
->>>>>>> rightNapravl
     public void setPosition(int x, int y) {
         if (proverka(x, y)) {
             this.y = y;
@@ -134,18 +113,8 @@ public abstract class Figure {
     }
 
     public boolean proverka(int x, int y) {
-<<<<<<< HEAD
-        if (length + y > Field.getFieldSize() - 1) {
-            length = Field.getFieldSize() - 1- y;
-        }
-        for (int[] direction : directions) {
-            if (field.checkLine(y, x, direction[0], direction[1], length).size() > 0) {
-                return true;
-            }
-=======
         for (Point podsv : podsvetka) {
             if(podsv.getX() == x && podsv.getY() == y) return true;
->>>>>>> rightNapravl
         }
         return false;
     }

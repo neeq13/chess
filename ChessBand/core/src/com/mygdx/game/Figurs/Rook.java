@@ -7,15 +7,10 @@ public class Rook extends Figure {
         super(x, y);
         this.name = "rook";
         this.shName = 'R';
-<<<<<<< HEAD
-        this.directions = new int[][]{{0,1},{1,0},{-1,0},{0,-1}};
-        this.length = 7;
-=======
         this.avialableTurns.add(new Turn(1, 0, true));
         this.avialableTurns.add(new Turn(0, 1, true));
         this.avialableTurns.add(new Turn(0, -1, true));
         this.avialableTurns.add(new Turn(-1, 0, true));
->>>>>>> rightNapravl
     }
 
 }
