@@ -84,8 +84,13 @@ public abstract class Figure {
     public void resetLight() {
         podsvetka.clear();
     }
-// абстрактные методы, установка фигуры в новые координаты и проверка на ход фигуры
-    public abstract void setPosition(int x, int y);
+
+    public void setPosition(int x, int y) {
+        if (proverka(x, y)) {
+            this.y = y;
+            this.x = x;
+        }
+    }
 
     public boolean isChangePosition(int x, int y) {
         if(this.x != x || this.y != y) {
@@ -95,9 +100,11 @@ public abstract class Figure {
         }
     }
 
-    public abstract boolean proverka(int x, int y);
-
-
-
+    public boolean proverka(int x, int y) {
+        for (Point podsv : podsvetka) {
+            if(podsv.getX() == x && podsv.getY() == y) return true;
+        }
+        return false;
+    }
 
 }
