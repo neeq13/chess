@@ -9,8 +9,6 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		System.setProperty("user.name", "EnglishWords");
 		new LwjglApplication(new GameClass(), config);
-		config.height = 480;
-		config.width = 700;
 		config.title = "Chess";
 	}
 }

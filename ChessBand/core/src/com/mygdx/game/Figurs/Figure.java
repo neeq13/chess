@@ -10,6 +10,15 @@ public abstract class Figure {
     protected int y;
     protected String name;
     protected char shName;
+    protected Boolean isAlive = true;
+
+    public void setAlive(Boolean alive) {
+        this.isAlive = alive;
+    }
+
+    public Boolean getAlive() {
+        return isAlive;
+    }
 
     Figure(int x, int y) {
         this.x = x;
@@ -77,7 +86,5 @@ public abstract class Figure {
     }
 
     public abstract boolean proverka(int x, int y);
-
-
 
 }

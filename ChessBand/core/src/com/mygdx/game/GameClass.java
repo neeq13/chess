@@ -15,8 +15,6 @@ public class GameClass extends ApplicationAdapter {
     Texture boxField;
 
     FigureFactory figures = new FigureFactory('w');
-    Box box = new Box('w');
-
     Field field = new Field();
 
     int mouseX;
@@ -27,7 +25,6 @@ public class GameClass extends ApplicationAdapter {
 
     @Override
     public void create() {
-
         batch = new SpriteBatch();
         pole = new Texture("size.png");
         Field.initField();
@@ -56,22 +53,21 @@ public class GameClass extends ApplicationAdapter {
         }
 
         //рисуем ящики
-        batch.draw(boxField,490,370,200,100);
-        batch.draw(boxField,490,20,200,100);
+        batch.draw(boxField, 490, 420, 100, 60);
+        batch.draw(boxField, 490, 0, 100, 60);
 
         //рисуем фигуры
+        int f=0;
         for (Figure figure: figures.white) {
             Texture texture = new Texture(figure.getName() + figures.getColor() + ".png");
-            batch.draw(texture, figure.getX() * 60, figure.getY() * 60);
+            if (figure.getAlive() == true) { //фигуры
+                batch.draw(texture, figure.getX() * 60, figure.getY() * 60);
+            } else { //срубленные фигуры
+                batch.draw(texture, 490 + (f % 8) * 10, (f / 8) * 30 + 420, 30, 30); //верхний ящик
+                //batch.draw(texture, 490 + (f % 8) * 10, (f / 8) * 30, 30, 30); //нижний ящик
+                f++;
+            }
             field.setXO(figure.getY(), figure.getX(), figure);
-        }
-
-        //рисуем срубленые фигуры
-        int l = 0;
-        for (Figure figure: box.whiteBox) {
-            l=l+10;
-            Texture texture1 = new Texture(figure.getName() + figures.getColor() + ".png");
-            batch.draw(texture1, 480 + (l), 380, 30, 30);
         }
 
         if (selectIndex > -1) {
@@ -80,12 +76,9 @@ public class GameClass extends ApplicationAdapter {
             for (int i = 0; i < figures.white.get(selectIndex).getPodsvetka().size(); i++) {
                 batch.draw(lightField, figures.white.get(selectIndex).getPodsvetka().get(i).getX() * 60, figures.white.get(selectIndex).getPodsvetka().get(i).getY() * 60);
             }
-
             batch.draw(texture, mouseX - 30, mouseY - 30);
         }
-
         batch.end();
-
     }
 
     public void update() {
@@ -104,10 +97,9 @@ public class GameClass extends ApplicationAdapter {
             }
         }
 
-        //1-определяем нажата ли мышка;2-добавляем в ArrayList ящика срубленную фигуру;3-удаляем срубленную фигуру с ArrayList фигур
+        //1-определяем нажата ли мышка;2-установить атрибут срубленной фигуре isAlive- false;
         if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1 && figures.white.get(selectIndex).isChangePosition(mouseCellX, mouseCellY)){
-            Box.whiteBox.add(figures.white.get(selectIndex));
-            figures.white.remove(figures.white.get(selectIndex));
+            figures.white.get(selectIndex).setAlive(false);
         }
 
         if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1 &&
@@ -120,10 +112,7 @@ public class GameClass extends ApplicationAdapter {
             }
             figures.white.get(selectIndex).resetLight();
             selectIndex = -1;
-
         }
     }
-
-
 }
 

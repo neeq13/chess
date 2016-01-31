@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class FigureFactory {
 
     public static ArrayList<Figure> white = new ArrayList<Figure>();
-
     private char color;
 
 
