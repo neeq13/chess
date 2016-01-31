@@ -1,5 +1,6 @@
 package com.mygdx.game.Figurs;
 import com.mygdx.game.Field;
+import com.mygdx.game.Turn;
 
 
 /**
@@ -11,6 +12,10 @@ public class Rook extends Figure {
         super(x, y);
         this.name = "rook";
         this.shName = 'R';
+        this.avialableTurns.add(new Turn(1, 0, true));
+        this.avialableTurns.add(new Turn(0, 1, true));
+        this.avialableTurns.add(new Turn(0, -1, true));
+        this.avialableTurns.add(new Turn(-1, 0, true));
     }
 
     public boolean proverka(int x, int y) {

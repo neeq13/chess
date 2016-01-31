@@ -2,6 +2,7 @@
 package com.mygdx.game.Figurs;
 
 import com.mygdx.game.Field;
+import com.mygdx.game.Turn;
 
 /**
  * Created by Алексей on 23.01.2016.
@@ -12,6 +13,15 @@ public class Queen extends Figure {
         super(x, y);
         this.name = "queen";
         this.shName = 'Q';
+        this.avialableTurns.add(new Turn(1, 0, true));
+        this.avialableTurns.add(new Turn(0, 1, true));
+        this.avialableTurns.add(new Turn(1, 1, true));
+        this.avialableTurns.add(new Turn(1, -1, true));
+        this.avialableTurns.add(new Turn(-1, -1, true));
+        this.avialableTurns.add(new Turn(-1, 0, true));
+        this.avialableTurns.add(new Turn(0, -1, true));
+        this.avialableTurns.add(new Turn(-1, 1, true));
+
     }
 
     public boolean proverka(int x, int y) {

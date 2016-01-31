@@ -2,6 +2,7 @@
 package com.mygdx.game.Figurs;
 
 import com.mygdx.game.Field;
+import com.mygdx.game.Turn;
 
 /**
  * Created by Алексей on 23.01.2016.
@@ -11,7 +12,10 @@ public class Bishop extends Figure {
     public Bishop(int x, int y) {
         super(x, y);
         this.name = "bishop";
-
+        this.avialableTurns.add(new Turn(1, 1, true));
+        this.avialableTurns.add(new Turn(-1, -1, true));
+        this.avialableTurns.add(new Turn(1, -1, true));
+        this.avialableTurns.add(new Turn(-1, 1, true));
     }
 
     public boolean proverka(int x, int y){

@@ -1,6 +1,9 @@
 package com.mygdx.game.Figurs;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.Field;
 import com.mygdx.game.Point;
+import com.mygdx.game.Turn;
 
 import java.util.ArrayList;
 
@@ -11,6 +14,7 @@ public abstract class Figure {
     protected String name;
     protected char shName;
     public Texture figtex;
+    protected Array<Turn> avialableTurns = new Array<Turn>();
 
     Figure(int x, int y) {
         this.x = x;
@@ -54,10 +58,24 @@ public abstract class Figure {
     }
     // заполняем массив точек с подсветкой
     public void light() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (proverka(i, j)) {
-                    podsvetka.add(new Point(i, j));
+        for (Turn avialableTurn : avialableTurns) {
+            boolean doContinue = true;
+            for (int i = 1; doContinue; i++) {
+                int tempX = x + avialableTurn.x * i;
+                int tempY = y + avialableTurn.y * i;
+
+                if((tempX > -1) && (tempX < 8) && (tempY > -1) && (tempY < 8)) {
+                    if(Field.getFigure(tempX, (Field.getFieldSize() - 1 - tempY)) != null) {
+                        doContinue = false;
+                    } else {
+                        podsvetka.add(new Point(tempX, tempY));
+                    }
+                } else {
+                    doContinue = false;
+                }
+
+                if (!avialableTurn.nextStep) {
+                    doContinue = false;
                 }
             }
         }
@@ -78,6 +96,7 @@ public abstract class Figure {
     }
 
     public abstract boolean proverka(int x, int y);
+
 
 
 
