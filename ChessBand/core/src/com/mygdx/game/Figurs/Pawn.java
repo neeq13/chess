@@ -11,7 +11,7 @@ public class Pawn extends Figure {
     }
 
     public void setPosition(int x, int y) {
-        if (proverka(x, y)) {
+        if (isRigthTurn(x, y)) {
             this.y = y;
             this.x = x;
             this.hasMoved = true;

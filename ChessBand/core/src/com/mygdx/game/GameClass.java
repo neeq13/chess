@@ -12,11 +12,11 @@ public class GameClass extends ApplicationAdapter {
     SpriteBatch batch;
     Texture pole;
     Texture lightField;
-
-    FigureFactory figures = new FigureFactory('w');
-
+    FigureFactory figures = new FigureFactory('w'); // массив армии белых ('w'). TODO: массив армии чёрных - отзеркалить
     Field field = new Field();
-
+    /*
+    ** Перемещение мыши и определение клеток
+     */
     int mouseX;
     int mouseY;
     int mouseCellX;
@@ -25,14 +25,14 @@ public class GameClass extends ApplicationAdapter {
 
     @Override
     public void create() {
-
         batch = new SpriteBatch();
         pole = new Texture("size.png");
         Field.initField();
 
         lightField = new Texture("allocation.png");
         figures.initFigure();
-        for (Figure fig : figures.white) {
+        // Каждой фигуре автоматическе присваивается текстура
+        for (Figure fig : figures.army) {
             fig.setFigtex(new Texture(fig.getName() + figures.getColor() + ".png"));
         }
     }
@@ -52,21 +52,19 @@ public class GameClass extends ApplicationAdapter {
                 }
             }
         }
-
-        for (Figure figure: figures.white) {
+        //отрисовка первоначального расположения фигур
+        for (Figure figure: figures.army) {
             batch.draw(figure.getFigtex(), figure.getX() * 60, figure.getY() * 60);
             field.setXO(figure.getY(), figure.getX(), figure);
         }
-
-        //field.printField();
-
+        // отрисовка отмеченной фигуры
         if (selectIndex > -1) {
-            Texture texture = new Texture(figures.white.get(selectIndex).getName() + figures.getColor() + ".png");
+            Texture texture = new Texture(figures.army.get(selectIndex).getName() + figures.getColor() + ".png");
             batch.draw(texture, mouseX - 30, mouseY - 30);
-            for (int i = 0; i < figures.white.get(selectIndex).getPodsvetka().size(); i++) {
-                batch.draw(lightField, figures.white.get(selectIndex).getPodsvetka().get(i).getX() * 60, figures.white.get(selectIndex).getPodsvetka().get(i).getY() * 60);
+            for (int i = 0; i < figures.army.get(selectIndex).getLighting().size(); i++) {
+                batch.draw(lightField, figures.army.get(selectIndex).getLighting().get(i).getX() * 60, figures.army.get(selectIndex).getLighting().get(i).getY() * 60);
             }
-            //batch.draw(texture, figures.white.get(selectIndex).getX() * 60, figures.white.get(selectIndex).getY() * 60);
+            //batch.draw(texture, figures.army.get(selectIndex).getX() * 60, figures.army.get(selectIndex).getY() * 60);
             batch.draw(texture, mouseX - 30, mouseY - 30);
         }
 
@@ -79,25 +77,26 @@ public class GameClass extends ApplicationAdapter {
         mouseCellX = mouseX / 60;
         mouseCellY = mouseY / 60;
 
+        //поиск фигуры, на которую щёлкнули
         if (selectIndex == -1) {
-            for (int i = 0; i < figures.white.size(); i++) {
-                if (figures.white.get(i).getX() == mouseCellX && figures.white.get(i).getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                    figures.white.get(i).light();
+            for (int i = 0; i < figures.army.size(); i++) {
+                if (figures.army.get(i).getX() == mouseCellX && figures.army.get(i).getY() == mouseCellY && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+                    figures.army.get(i).light();
                     selectIndex = i;
                     break;
                 }
             }
         }
 
+        // ходим фигурами
         if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT) && selectIndex > -1 &&
-                figures.white.get(selectIndex).isChangePosition(mouseCellX, mouseCellY)) {
-            field.setXO(figures.white.get(selectIndex).getY(), figures.white.get(selectIndex).getX(), null);
+                figures.army.get(selectIndex).isChangePosition(mouseCellX, mouseCellY)) {
+            field.setXO(figures.army.get(selectIndex).getY(), figures.army.get(selectIndex).getX(), null);
             if (mouseCellX >= 0 && mouseCellY >= 0 && mouseCellX < 8 && mouseCellY < 8) {//Условие запрета выхода за границу поля
-                figures.white.get(selectIndex).setPosition(mouseCellX, mouseCellY);
-
+                figures.army.get(selectIndex).setPosition(mouseCellX, mouseCellY);
             }
-            figures.white.get(selectIndex).resetLight();
-            selectIndex = -1;
+            figures.army.get(selectIndex).resetLight(); // сбрасываем подсветку возможных ходов
+            selectIndex = -1; // сбрасываем индекс отмеченной фигуры
         }
     }
 }

@@ -16,6 +16,5 @@ public class Queen extends Figure {
         this.avialableTurns.add(new Turn(-1, 0, true));
         this.avialableTurns.add(new Turn(0, -1, true));
         this.avialableTurns.add(new Turn(-1, 1, true));
-
     }
 }
