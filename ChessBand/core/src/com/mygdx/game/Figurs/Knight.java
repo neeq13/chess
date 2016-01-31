@@ -1,19 +1,13 @@
-
 package com.mygdx.game.Figurs;
+import com.mygdx.game.Turn;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.Field;
-
-/**
- * Created by Алексей on 23.01.2016.
- */
 public class Knight extends Figure {
-
 
     public Knight(int x, int y) {
         super(x, y);
         this.name = "knight";
         this.shName = 'N';
+<<<<<<< HEAD
     }
 
     public boolean proverka(int x, int y) {
@@ -25,4 +19,17 @@ public class Knight extends Figure {
         return false;
     }
 
+=======
+        this.avialableTurns.add(new Turn(2, 1, false));
+        this.avialableTurns.add(new Turn(2, -1, false));
+        this.avialableTurns.add(new Turn(1, 2, false));
+        this.avialableTurns.add(new Turn(1, -2, false));
+        this.avialableTurns.add(new Turn(-1, 2, false));
+        this.avialableTurns.add(new Turn(-1, -2, false));
+        this.avialableTurns.add(new Turn(-2, 1, false));
+        this.avialableTurns.add(new Turn(-2, -1, false));
+
+    }
+
+>>>>>>> rightNapravl
 }
