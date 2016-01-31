@@ -1,5 +1,6 @@
 package com.mygdx.game.Figurs;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.Field;
 import com.mygdx.game.Point;
 
 import java.util.ArrayList;
@@ -10,7 +11,19 @@ public abstract class Figure {
     protected int y;
     protected String name;
     protected char shName;
-    public Texture figtex;
+    Field field = new Field();
+
+    public Texture getFigtex() {
+        return figtex;
+    }
+
+    public void setFigtex(Texture figtex) {
+        this.figtex = figtex;
+    }
+
+    protected Texture figtex;
+    protected int[][] directions = {{0,1},{1,0},{1,1},{-1,-1},{-1,0},{0,-1}};
+    protected int length;
 
     Figure(int x, int y) {
         this.x = x;
@@ -78,6 +91,18 @@ public abstract class Figure {
     }
 
     public abstract boolean proverka(int x, int y);
+
+    public void getDirections() {
+        if (length + y > Field.getFieldSize() - 1) {
+            length = Field.getFieldSize() - 1- y;
+        }
+        for (int[] direction : directions) {
+           ArrayList<Point> points = field.checkLine(y,x, direction[0], direction[1], length);
+            for (Point point : points) {
+                System.out.println(point.getX() + ":" + point.getY());
+            }
+        }
+    }
 
 
 

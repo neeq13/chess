@@ -33,7 +33,7 @@ public class GameClass extends ApplicationAdapter {
         lightField = new Texture("allocation.png");
         figures.initFigure();
         for (Figure fig : figures.white) {
-            fig.figtex = new Texture(fig.getName() + figures.getColor() + ".png");
+            fig.setFigtex(new Texture(fig.getName() + figures.getColor() + ".png"));
         }
     }
 
@@ -54,7 +54,7 @@ public class GameClass extends ApplicationAdapter {
         }
 
         for (Figure figure: figures.white) {
-            batch.draw(figure.figtex, figure.getX() * 60, figure.getY() * 60);
+            batch.draw(figure.getFigtex(), figure.getX() * 60, figure.getY() * 60);
             field.setXO(figure.getY(), figure.getX(), figure);
         }
 

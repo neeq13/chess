@@ -11,10 +11,12 @@ public class Rook extends Figure {
         super(x, y);
         this.name = "rook";
         this.shName = 'R';
+        this.directions = new int[][]{{0,1},{1,0},{-1,0},{0,-1}};
+        this.length = 7;
     }
 
     public boolean proverka(int x, int y) {
-        if (Field.isCellEmpty(y, x)) {
+        if (Field.isCellEmpty(Field.getFieldSize() - 1 - y, x)) {
             if(Math.abs(y - this.y) <= Field.getFieldSize() && x - this.x == 0 ||
                     y - this.y == 0 && Math.abs(x - this.x) <= Field.getFieldSize()) {
                 return true;

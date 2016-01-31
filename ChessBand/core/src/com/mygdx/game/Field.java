@@ -2,6 +2,8 @@ package com.mygdx.game;
 
 import com.mygdx.game.Figurs.Figure;
 
+import java.util.ArrayList;
+
 public class Field {
     private Figure figure;
     private static final int FIELD_SIZE = 8;
@@ -50,17 +52,28 @@ public class Field {
 
     public static boolean isCellEmpty(int _y, int _x)
     {
-        if (field[FIELD_SIZE - 1 -_y][_x] == null)
-            return true;
-        return false;
+        if(_y < getFieldSize() && _y >= 0 && _x < getFieldSize() && _x >= 0) {
+            if (field[_y][_x] == null) {
+                return true;
+            }
+        }
+            return false;
     }
 
-    public static boolean checkLine(int _y, int _x, int _vx, int _vy, int _l)
+    public ArrayList<Point> checkLine(int _y, int _x, int _vx, int _vy, int _l)
     {
-        for(int i=0; i<_l; i++) {
-            if(!isCellEmpty(_y + i * _vy, _x + i * _vx)) return false;
+        ArrayList points = new ArrayList();
+
+        for(int i=1; i<_l; i++) {
+            if (isCellEmpty(Field.getFieldSize() - 1 - _y + i * _vy, _x - i * _vx))
+            {
+                System.out.println("Точка " + (_x - i * _vx) + ":" + (_y - i * _vy));
+                points.add(new Point((_x - i * _vx), (_y - i * _vy)));
+            } else {
+                break;
+            }
         }
-        return true;
+        return points;
     }
     
 }

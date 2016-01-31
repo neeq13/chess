@@ -11,11 +11,14 @@ public class Bishop extends Figure {
     public Bishop(int x, int y) {
         super(x, y);
         this.name = "bishop";
+        this.shName = 'B';
+        this.directions = new int[][]{{1,1},{-1,-1}};
+        this.length = 7;
 
     }
 
     public boolean proverka(int x, int y){
-        if (Field.isCellEmpty(y, x)) {
+        if (Field.isCellEmpty(Field.getFieldSize() - 1 - y, x)) {
             if (Math.abs(y - this.y) == Math.abs(x - this.x)) {
                 return true;
             }

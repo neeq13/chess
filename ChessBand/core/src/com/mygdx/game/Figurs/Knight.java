@@ -17,7 +17,7 @@ public class Knight extends Figure {
     }
 
     public boolean proverka(int x, int y) {
-        if (Field.isCellEmpty(y, x)) {
+        if (Field.isCellEmpty(Field.getFieldSize() - 1 - y, x)) {
             if (Math.abs(y - this.y) == 2 && Math.abs(x - this.x) == 1 || Math.abs(y - this.y) == 1 && Math.abs(x - this.x) == 2) {
                 return true;
             }
