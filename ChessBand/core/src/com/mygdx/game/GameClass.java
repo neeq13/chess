@@ -9,11 +9,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class GameClass extends ApplicationAdapter {
     SpriteBatch batch;
     Texture field;
+    GameInit newGame;
 
     @Override
     public void create () {
         batch = new SpriteBatch();
-        field = new Texture("size.png");
+        field = new Texture("field.png");
+        newGame = new GameInit();
+
     }
 
     @Override
@@ -22,13 +25,10 @@ public class GameClass extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
 
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if ((i + j) % 2 == 0)
-                    batch.draw(field, i * 60, j * 60, 60, 0, 60, 60);
-                else
-                    batch.draw(field, i * 60, j * 60, 0, 0, 60, 60);
-            }
+        batch.draw(field, 0, 0);
+
+        for (int i = 0; i <newGame.figures.size() ; i++) {
+            batch.draw(newGame.figures.get(i).getTexture(), newGame.figures.get(i).getX() * 60, newGame.figures.get(i).getY() * 60);
         }
 
         batch.end();
